@@ -252,16 +252,31 @@ main {
 }
 
 .resume-embed-wrap embed,
-.resume-embed-wrap iframe {
+.resume-embed-wrap iframe,
+.resume-embed-wrap object {
   width: 100%;
   height: 85vh;
   min-height: 700px;
   border: 0;
 }
 
+.resume-open-link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.resume-open-link:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
 .resume-download {
   display: inline-block;
-  margin-top: 1rem;
   font-weight: 500;
   font-size: 0.9rem;
 }
