@@ -131,6 +131,32 @@ main {
   margin: 0 auto;
 }
 
+.hero-side {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  text-align: left;
+  padding: 2rem 0 2.5rem;
+}
+
+.hero-left {
+  flex-shrink: 0;
+}
+
+.hero-right {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-side .hero-headshot {
+  margin: 0 0 0.75rem 0;
+}
+
+.hero-side .hero-left h1 {
+  font-size: 1.35rem;
+  margin-bottom: 0;
+}
+
 .hero-headshot {
   width: 250px;
   height: 250px;
@@ -141,7 +167,7 @@ main {
   border: 2px solid var(--border);
 }
 
-.hero h1 {
+.hero:not(.hero-side) h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
@@ -240,6 +266,63 @@ main {
 
 .contact-inline a {
   margin-right: 1rem;
+}
+
+/* Compact about (beside hero) */
+.about-compact {
+  margin-bottom: 1.25rem;
+}
+
+.about-compact:last-child {
+  margin-bottom: 0;
+}
+
+.about-compact h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.about-compact ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+.about-compact li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-left: 1rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+}
+
+.about-compact li::before {
+  left: 0;
+  top: 0.45em;
+  width: 4px;
+  height: 4px;
+}
+
+.about-compact .focus-tags {
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.about-compact .focus-tags span {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.about-compact p {
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+}
+
+.about-compact .contact-inline {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
 }
 
 /* ===== Resume embed  ===== */
@@ -602,7 +685,22 @@ main {
     gap: 1.25rem;
   }
 
-  .hero h1 {
+  .hero-side {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-side .hero-right {
+    text-align: left;
+    width: 100%;
+  }
+
+  .hero-side .hero-headshot {
+    margin: 0 auto 0.75rem;
+  }
+
+  .hero:not(.hero-side) h1 {
     font-size: 1.6rem;
   }
 
