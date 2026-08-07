@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Production Robotic Vision Debugging — Vattanary Tevy</title>
+  <title>Production Robotic Vision — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
@@ -17,72 +17,64 @@
 
   <main>
     <div class="project-hero">
-      <h1>Finding a Month-Old Failure in a Production Robotic Vision System</h1>
+      <h1>Debugging a Robotic Vision System in Production</h1>
       <p class="role">Amazon Robotics · Robotics Data Scientist Intern · Sep – Dec 2025</p>
     </div>
 
     <section class="detail-section">
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        This work is covered by confidentiality, so the description below stays at
-        the level of method rather than system specifics.
+      <div class="callout">
+        This work is confidential. What follows is a high-level description of the
+        problem shape and my approach — no system details, data, or results.
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>The problem shape</h2>
+      <p>
+        A robotic vision system in production was failing intermittently, and had
+        been for about a month without an identified cause. Failures like this are
+        genuinely hard for a structural reason: they are too rare to reproduce on
+        demand, so you cannot attach a debugger and wait for one, but too frequent
+        to write off as noise. Direct debugging had already been attempted and had
+        not converged.
       </p>
     </section>
 
     <section class="detail-section">
-      <h2>The problem</h2>
+      <h2>My approach</h2>
       <p>
-        A robotic vision system in production was failing intermittently. It had
-        been doing so for roughly a month without an identified cause. Failures of
-        this shape are genuinely hard: too rare to reproduce on demand, so you
-        cannot attach a debugger and wait; too frequent to write off as noise, so
-        you cannot ignore them. Conventional debugging had already been tried and
-        had not converged.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Reframing it as a statistics problem</h2>
-      <p>
-        The insight was that the system had already recorded the evidence. Millions
-        of production cycles had been logged, each with its conditions and its
-        outcome. That is not a debugging problem — it is a hypothesis-testing
-        problem, and the question is not "what went wrong in this trace" but
-        "which conditions are the failures <em>not</em> independent of."
+        My contribution was to reframe it. The system had already recorded the
+        evidence — every cycle it ran was logged with its conditions and its
+        outcome. That makes it a hypothesis-testing problem rather than a
+        debugging problem, and it changes the question from "what went wrong in
+        this trace" to "which conditions are the failures <em>not</em> independent
+        of."
       </p>
       <p>
-        I applied chi-square and independence testing across the logged cycle
-        population to find the conditions whose association with failure was too
-        strong to be chance. At production scale, the sample size that makes the
-        failure hard to reproduce manually is exactly what makes it easy to detect
-        statistically — the rarity works in your favor once you stop trying to
-        catch a single instance.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Cross-model consistency as a detector</h2>
-      <p>
-        Separately, I designed consistency metrics across the segmentation, depth,
-        and dimension pipelines. The principle: these models observe the same
-        physical scene through different representations, so their outputs are
-        mutually constrained by geometry. Segmentation and depth should agree about
-        where an object's boundary is; depth and dimension should agree about how
-        large it is.
+        I applied statistical independence testing across the logged population to
+        find conditions whose association with failure was too strong to be
+        chance. The useful inversion is that at production scale, the same rarity
+        that makes a failure impossible to catch by hand is what makes it visible
+        statistically — you stop trying to catch one instance and start measuring
+        the population.
       </p>
       <p>
-        That yields a supervision signal without ground-truth labels. When the
-        models disagree with each other beyond what their independent error rates
-        would explain, at least one is wrong — and you learn this in production,
-        continuously, without anyone annotating anything. I built these as scalable
-        Python pipelines over AWS S3 and SQL.
+        I also worked on consistency metrics between perception models. The
+        principle is that models observing the same physical scene through
+        different representations are mutually constrained by geometry, so their
+        disagreement is measurable without ground-truth labels. When they disagree
+        beyond what their independent error rates explain, at least one is wrong —
+        and you learn that continuously, in production, without anyone annotating
+        anything. I built the supporting data pipelines in Python over AWS S3 and
+        SQL.
       </p>
     </section>
 
     <section class="detail-section">
       <h2>Outcome</h2>
       <ul>
-        <li>Root cause isolated in under two weeks — more than 50% faster than the preceding effort — which directly unblocked the engineering fix.</li>
-        <li>The consistency metrics became a production monitoring framework used for threshold tuning and alerting, so the class of failure is now caught rather than rediscovered.</li>
+        <li>Root cause isolated in under two weeks, substantially faster than the preceding effort, which unblocked the engineering fix.</li>
+        <li>The consistency work fed into ongoing production monitoring, so this class of failure is caught rather than rediscovered.</li>
       </ul>
     </section>
 
@@ -92,9 +84,9 @@
         A learned policy that works in the lab and degrades quietly in the field is
         the default failure mode of robot deployment, and it is rarely a dramatic
         crash — it is a slow drift in a perception input that nothing was watching.
-        The transferable lesson here is that deployment monitoring has to be
-        designed alongside the system, and that models which observe the same
-        physical world can be made to check each other for free.
+        The transferable lesson is that monitoring has to be designed alongside the
+        system, and that models observing the same physical world can be made to
+        check each other for free.
       </p>
     </section>
 

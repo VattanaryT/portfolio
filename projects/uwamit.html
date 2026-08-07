@@ -49,7 +49,9 @@
         rig, GE HealthCare wanted this modality running on a <strong>commercial
         scanner they already sell</strong>. That meant designing a payload that
         fits an existing product's mechanical and electrical envelope, and
-        achieving clinical-grade validation rather than a working demo.
+        achieving clinical-grade validation rather than a working demo — and it
+        meant building the position-synchronized triggering the platform had no
+        mechanism for.
       </p>
     </section>
 
@@ -80,47 +82,45 @@
     </section>
 
     <section class="detail-section">
-      <h2>The synchronization failure at 3000 RPM</h2>
+      <h2>Building the trigger that didn't exist</h2>
       <p>
-        The system uses a rotating stage to sweep illumination. At 3000 RPM
-        (17,400 deg/s), laser-fiber synchronization failed and image resolution
-        degraded.
+        The scanner sweeps illumination on a rotating stage running at 17,400
+        deg/s (2,900 RPM). To acquire photoacoustic and ultrasound concurrently,
+        the laser has to fire at known angular positions during that sweep — and
+        there was no mechanism to do it. This was not a broken subsystem I
+        repaired; it was a capability the system did not have, which I designed
+        and built.
       </p>
       <p>
-        Faults like this are expensive because the symptom appears in the image,
-        which is the last stage of a chain that crosses three engineering domains.
-        Mechanical runout, electrical trigger latency, and software timing jitter
-        all produce the same blur. I isolated it by testing the layers separately
-        rather than guessing — characterizing each independently so the domain
-        could be identified before anything was redesigned.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Position-synchronized triggering</h2>
-      <p>
-        The fix was to stop triggering the laser on <em>time</em> and start
-        triggering it on <em>position</em>. Using the Aerotech stage's
-        Position Synchronized Output, the controller fires pulses off the encoder
-        itself, so a pulse is emitted when the stage physically reaches an angle
-        rather than when a timer expires.
+        The naive approach is to fire the laser on a timer. That fails at this
+        speed, because a timer assumes you know exactly where the stage will be
+        when it expires. Velocity ripple, control-loop lag, and host-side
+        scheduling jitter all displace the pulse from its intended angle, and
+        since sound travels roughly 1.5 mm per microsecond in tissue, that
+        displacement lands directly in the reconstruction as blur.
       </p>
       <p>
-        This removes the entire error path: velocity ripple, control-loop lag, and
-        host-side scheduling jitter no longer displace the pulse, because the
-        encoder is the source of truth for both the firing and the reconstruction.
-        I implemented the trigger configuration — total fixed time, ON time, and
-        pulse count — and the Python control layer over UART, driving a 1000 Hz
-        multimodal acquisition (fiber optics, laser timing, ultrasound) with
-        custom Automation1 scripts, plus the Python API and operator GUI for the
-        full workflow.
+        So I triggered on <em>position</em> instead of time. Using the Aerotech
+        stage's Position Synchronized Output, the controller fires pulses off the
+        encoder itself — a pulse is emitted when the stage physically reaches an
+        angle, not when a clock says it should have. The encoder becomes the
+        single source of truth for both the firing and the reconstruction, which
+        removes the entire timing-error path rather than budgeting for it.
+      </p>
+      <p>
+        I worked out the trigger configuration — total fixed time, ON time, and
+        pulse count — against the stage's motion profile, and built the software
+        around it: a 1000 Hz multimodal acquisition path (fiber optics, laser
+        timing, ultrasound) using custom Python and Automation1 control scripts
+        over UART, plus the Python API and operator GUI covering the full user
+        workflow.
       </p>
       <div class="callout">
         <strong>The general lesson:</strong> when a timing requirement is really a
         geometric requirement, derive the trigger from the position sensor instead
         of the clock. The same reasoning applies to camera-to-actuator
-        synchronization in any robot that has to act on what it saw at a
-        specific pose.
+        synchronization in any robot that has to act on what it saw at a specific
+        pose.
       </div>
     </section>
 
@@ -128,6 +128,7 @@
       <h2>Outcome</h2>
       <ul>
         <li>Concept through validated prototype, meeting clinical-grade image resolution targets — without extending the project timeline.</li>
+        <li>Concurrent photoacoustic and ultrasound acquisition enabled by position-synchronized triggering built from scratch.</li>
         <li>Structured V&amp;V and first-article inspection carried through to a system integrated on a commercial scanner.</li>
         <li>Co-authored publication: R. Shang*, P. Lorraine, S. Smith, H. Chan, <strong>V. Tevy*</strong>, I. Pelivanov, M. O'Donnell, "Real-time spectroscopic PAUS imaging integrated on a commercial scanner," <em>SPIE Photonics West</em>, Jan 2025. (* equal contribution)</li>
       </ul>
