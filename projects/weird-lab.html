@@ -3,40 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WEIRD Lab — Vattanary Tevy</title>
+  <title>Bimanual Robotic Composite Layup — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Washington Embodied Intelligence and Robotics Development Lab (WEIRD Lab)</h1>
-      <p class="role">Robotics & RL Research</p>
+      <h1>Teaching Two Robot Arms to Lay Up Carbon Fiber</h1>
+      <p class="role">WEIRD Lab, University of Washington · Robotics Researcher &amp; Amazon Robotics Research Fellow · Jan 2026 – present</p>
     </div>
 
     <div class="gallery">
-      <img src="../assets/img/geodude_teleop.png" alt="Teleop demonstration" />
+      <img src="../assets/img/geodude_teleop.png" alt="Teleoperation setup for collecting layup demonstrations" />
       <video src="../assets/img/right_wrist.mp4" muted playsinline loop autoplay></video>
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Research in embodied AI, robotics, and reinforcement learning—including teleoperation and imitation learning for dexterous manipulation.</p>
+      <h2>Why this task resists conventional automation</h2>
+      <p>
+        Composite layup — pressing a ply of carbon fiber prepreg into a mold so it
+        conforms without wrinkling — is still done by hand in most of aerospace.
+        The reason is that it is a <strong>contact-rich, compliant-material task
+        with no clean state representation</strong>. The ply deforms as you touch
+        it, so its shape at any moment is a function of the entire history of
+        contact applied to it. A technician succeeds by modulating force against
+        felt resistance, and cannot articulate the policy they are executing.
+      </p>
+      <p>
+        That combination defeats the two usual approaches. You cannot script a
+        trajectory, because the correct motion depends on how the material has
+        already deformed. And you cannot easily write a reward function, because
+        "did this wrinkle" is a property of the finished surface, not of any
+        instantaneous state. It is a good task for imitation learning, and a
+        good argument for why physical intelligence needs both hardware and
+        policy work in the same pair of hands.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
+      <h2>System architecture</h2>
+      <p>
+        Two UR5e arms, each with a distinct job. The split is the core design
+        decision of the system: it separates <em>doing the task</em> from
+        <em>measuring whether the task went well</em>, so that quality
+        measurement is a first-class, automated part of the loop rather than a
+        human stepping in between episodes.
+      </p>
+      <div class="table-scroll">
+        <table class="spec-table">
+          <tr>
+            <th>Right arm — execution</th>
+            <td>Runs the learned manipulation policy. Custom end-effector for
+            contact-rich layup, driven under real-time impedance control so
+            contact forces stay bounded and compliant against the mold.</td>
+          </tr>
+          <tr>
+            <th>Left arm — evaluation</th>
+            <td>Carries a laser profilometer. Scans the laid-up surface to detect
+            and quantify wrinkle formation, producing an objective quality score
+            per episode.</td>
+          </tr>
+          <tr>
+            <th>Policy stack</th>
+            <td>ACT (action chunking) and Diffusion Policy (Chi et al.),
+            implemented through Hugging Face LeRobot.</td>
+          </tr>
+          <tr>
+            <th>Runtime</th>
+            <td>ROS2 on Linux, coordinating both arms, the profilometer, and the
+            teleoperation rig.</td>
+          </tr>
+          <tr>
+            <th>Data</th>
+            <td>Multimodal teleoperation demonstrations — position, force, and
+            contact — collected through a pipeline I own end to end.</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Hardware: the part that decides whether the policy can work</h2>
+      <p>
+        I design and fabricate the end-effector subsystems, fixtures, and
+        assembly tooling for both arms in SolidWorks, and validate them through
+        structured closed-loop hardware test cycles against stiffness, weight,
+        and repeatability targets.
+      </p>
+      <p>
+        The reason I do this rather than treat the hardware as given: in a
+        contact-rich task, the mechanical design sets the ceiling on what any
+        policy can learn. End-effector compliance determines whether the impedance
+        controller has usable dynamics to work with. Structural stiffness
+        determines whether a commanded pose corresponds to an actual pose.
+        Repeatability determines whether two demonstrations of the same motion
+        are actually the same data point or two different ones — which directly
+        sets how much demonstration data you need before a policy converges.
+        Getting these wrong produces a training problem that looks like a
+        learning failure and is actually a hardware failure.
+      </p>
+      <div class="callout">
+        <strong>The thesis behind the project:</strong> mechanical design choices
+        are not upstream of policy learning, they are part of it. Owning both is
+        what lets me diagnose which one is the bottleneck.
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Control: impedance, not position</h2>
+      <p>
+        The right arm runs real-time impedance control rather than position
+        control. Commanding position into a contact task means the arm will
+        happily drive through the ply and the mold to reach a setpoint. Impedance
+        control instead specifies the <em>relationship</em> between deviation and
+        force — the arm behaves like a programmable spring-damper — so contact is
+        bounded by construction, and the policy can command "press toward the
+        mold" without needing to know the exact mold geometry.
+      </p>
+      <p>
+        This also changes what the policy has to learn. Under impedance control,
+        the action space is closer to the intent the human demonstrator had
+        ("press here, this firmly") than a position trajectory would be, which
+        makes the demonstrations more informative per episode.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>The pipeline I own</h2>
       <ul>
-        <li>Translated open-ended research goals into measurable success criteria and benchmarking methodology for dexterous manipulation policies (e.g. carbon fiber layup tasks).</li>
-        <li>Own end-to-end data collection pipeline and experiment cycles—balancing quality, hardware constraints, and research pace to maintain continuous iteration toward policy performance targets.</li>
-        <li>Evaluation frameworks and iterative improvement cycles; teleoperation and imitation learning as part of the pipeline.</li>
+        <li><strong>Collection —</strong> teleoperated demonstrations capturing position, force, and contact together, so the policy sees the same modalities at training time that it will act on at deployment.</li>
+        <li><strong>Training —</strong> ACT and Diffusion Policy, compared against each other on the same demonstration set.</li>
+        <li><strong>Evaluation —</strong> closed-loop rollouts on the real hardware, scored by the profilometer arm rather than by held-out action prediction error. Action-space loss on a validation set does not tell you whether a ply wrinkled.</li>
+        <li><strong>Iteration —</strong> rapid experiment cycles to identify failure modes, revise the architecture or the hardware depending on which is implicated, and re-run.</li>
       </ul>
     </section>
 
-    <a href="../index.html#weird-lab" class="back-link">← Maker portfolio</a>
+    <section class="detail-section">
+      <h2>Toward reward from sensing</h2>
+      <p>
+        The current direction is DSRL infrastructure that uses profilometer
+        feedback as a learned reward signal. The appeal is that wrinkle
+        measurement is already an automated, physical, objective quantity — which
+        makes it one of the rare contact-rich manipulation tasks where the reward
+        does not have to be hand-designed or human-labeled. That turns the
+        evaluation arm from a measurement device into a training signal, and lets
+        the system improve past the quality of the demonstrations it was given.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Status</h2>
+      <p>
+        Research in preparation for publication: <em>Bimanual robotic composite
+        layup with learned manipulation policies and profilometric quality
+        evaluation.</em>
+      </p>
+    </section>
+
+    <a href="../index.html#weird-lab" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

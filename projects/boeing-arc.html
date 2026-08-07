@@ -3,57 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boeing ARC — Vattanary Tevy</title>
+  <title>Composite Inspection End-Effector — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Boeing Advanced Research Center (BARC)</h1>
-      <p class="role">Research Assistant</p>
+      <h1>Redesigning a Robot End-Effector That Was Faking Its Own Defects</h1>
+      <p class="role">Boeing Advanced Research Center (BARC) · Mechanical Design Research Assistant · May 2023 – Jun 2024</p>
     </div>
 
     <div class="gallery">
-      <img src="../assets/img/curved_cad.png" alt="Curved probe CAD" />
+      <img src="../assets/img/curved_cad.png" alt="Two-curve probe end-effector CAD" />
       <video src="../assets/img/curved_probe.MOV" muted playsinline loop autoplay></video>
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Research at BARC included mechanical design of a curved probe end-effector for complex composite scans and algorithm development for robot path planning (Boustrophedon decomposition). FFT-based noise reduction for signal processing.</p>
+      <h2>The problem</h2>
+      <p>
+        Boeing inspects composite structures ultrasonically: a robot arm sweeps a
+        probe across the part, the probe sends sound in and listens for the echoes
+        that indicate delamination or voids. Sound does not travel usefully from a
+        transducer into air, so the probe rides on a column of water that couples
+        it to the surface.
+      </p>
+      <p>
+        On curved parts, scans were returning indications where the part was
+        actually sound. False positives in this setting are costly in a specific
+        way: you cannot ship a part you cannot clear, so every phantom indication
+        becomes manual re-inspection or a scrapped component. The reported problem
+        was "the scans are noisy." The actual question was whether the noise was
+        coming from the part or from the instrument.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Curved probe design</h2>
-      <ul>
-        <li>Idea inspiration from current design; improved for laser line scanner, water column, and robot path planning</li>
-        <li>Compared with previous concepts (e.g. flat end effector) and iterated to final curved design</li>
-      </ul>
+      <h2>Diagnosis: FFT on the scan signal</h2>
+      <p>
+        I analyzed the scan signal in the frequency domain. The reasoning is that
+        material defects are irregular — they appear where the flaw is and nowhere
+        else — whereas an artifact produced by the fixture's own geometry repeats
+        with the scan motion. A defect is broadband and localized; a geometric
+        artifact is periodic and lands on identifiable frequencies.
+      </p>
+      <p>
+        The FFT separated those populations and identified <strong>two distinct
+        root causes</strong>: one from the probe geometry itself, and one from
+        inconsistent water coupling as the probe traversed curvature. Both were
+        instrument artifacts. Neither was a defect in the part.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Path planning — Boustrophedon decomposition</h2>
-      <ul>
-        <li>Identify obstacle coordinates to avoid</li>
-        <li>Use IN and OUT events (identified via ceiling and floor pointers), dividing the workspace into cells</li>
-        <li>Depth-first search to navigate through cells in a counterclockwise manner</li>
-      </ul>
+      <h2>Fix 1 — a two-curve probe geometry</h2>
+      <p>
+        The existing flat end-effector cannot maintain a consistent standoff
+        distance across a curved surface: the gap between transducer and part
+        varies with position, which changes the time-of-flight and therefore where
+        the echo appears in the gate. That variation is what was reading as a
+        defect.
+      </p>
+      <p>
+        I designed a novel <strong>two-curve probe</strong> — curvature in two
+        planes rather than one — so the standoff stays consistent across
+        doubly-curved composite geometry rather than only along a single sweep
+        direction. Design work in SolidWorks with GD&amp;T and FEA, constrained to
+        CNC-machinable geometry so it could actually be produced; I compared it
+        against the prior flat and single-curve concepts, coordinated fabrication,
+        inspected first articles, and validated by scan testing.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
+      <h2>Fix 2 — the water column</h2>
+      <p>
+        The second cause was coupling. Wherever the water column thinned or broke,
+        the acoustic path degraded and the signal-to-noise ratio dropped —
+        producing exactly the intermittent indications being reported.
+      </p>
+      <p>
+        I redesigned the fixture and ran a structured validation plan across two
+        iterations, improving <strong>water retention by 40%</strong>. That
+        directly raised SNR and defect-detection reliability, because the
+        inspection can only be as good as the acoustic contact it maintains.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Coverage path planning</h2>
+      <p>
+        I also implemented Boustrophedon cell decomposition for the robot's scan
+        path — the coverage-planning problem of sweeping an entire surface while
+        avoiding obstacles, with no gaps and minimal redundant passes:
+      </p>
       <ul>
-        <li>Identified two root causes of scan artifacts in Boeing composite inspection workflows using FFT-based signal analysis.</li>
-        <li>Designed a novel two-curve probe geometry that eliminated geometric artifacts; redesigned the fixture to increase water retention by 40%—improving defect detection reliability and SNR.</li>
-        <li>Curved probe designed for laser line scanner, water column, and robot path planning; compared with prior concepts (e.g. flat end effector) and iterated to final design. Path planning via Boustrophedon decomposition (IN/OUT events, DFS).</li>
+        <li>Identify obstacle coordinates in the workspace to avoid.</li>
+        <li>Sweep a line across the space, detecting IN and OUT events via ceiling and floor pointers, which decompose the free space into cells that each admit a simple back-and-forth (boustrophedon) fill.</li>
+        <li>Depth-first search over the cell adjacency graph to order traversal counterclockwise, so every cell is covered and the transit between cells is short.</li>
+      </ul>
+      <p>
+        Coverage matters for inspection in the same way it matters for any robot
+        that has to service a whole surface: an unvisited cell is an uninspected
+        region, and an uninspected region is indistinguishable from a passing one.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Outcome</h2>
+      <ul>
+        <li>Geometry-induced scan artifacts eliminated from Boeing's composite inspection workflow.</li>
+        <li>40% increase in water retention, improving defect-detection reliability and SNR.</li>
+        <li>Delivered as inspected, validated hardware — not a concept study.</li>
       </ul>
     </section>
 
-    <a href="../index.html#boeing-arc" class="back-link">← Maker portfolio</a>
+    <a href="../index.html#boeing-arc" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>
