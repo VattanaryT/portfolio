@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo \"exit:$?\")",
+      "Bash(git checkout *)",
+      "Bash(libreoffice --headless --convert-to pdf --outdir /tmp/claude-1000/-home-vattanary-Documents-Personal-engineering-portfolio-template/c1c960b9-a04f-4717-aca9-4341434f4c6b/scratchpad \"/home/vattanary/Downloads/files\\(1\\)/Vattanary_Tevy_Resume_Meta_ResearchScientist.docx\")",
+      "Bash(git rm *)",
+      "Bash(cp \"/tmp/claude-1000/-home-vattanary-Documents-Personal-engineering-portfolio-template/c1c960b9-a04f-4717-aca9-4341434f4c6b/scratchpad/Vattanary_Tevy_Resume_Meta_ResearchScientist.pdf\" resume/Vattanary_Tevy_Resume.pdf)",
+      "Bash(pdfinfo resume/Vattanary_Tevy_Resume.pdf)",
+      "Bash(git mv *)",
+      "Bash(google-chrome --headless --disable-gpu --no-sandbox --hide-scrollbars --window-size=1280,1500 --screenshot=/tmp/claude-1000/-home-vattanary-Documents-Personal-engineering-portfolio-template/c1c960b9-a04f-4717-aca9-4341434f4c6b/scratchpad/home2.png http://localhost:8931/index.html)",
+      "Bash(pkill -f \"http.server 8931\")",
+      "Bash(python3 -)",
+      "Bash(google-chrome --headless --disable-gpu --no-sandbox --hide-scrollbars --window-size=1280,1400 --screenshot=/tmp/claude-1000/-home-vattanary-Documents-Personal-engineering-portfolio-template/c1c960b9-a04f-4717-aca9-4341434f4c6b/scratchpad/weird3.png http://localhost:8931/projects/weird-lab.html)",
+      "Bash(google-chrome --headless --disable-gpu --no-sandbox --hide-scrollbars --window-size=1280,1450 --screenshot=/tmp/claude-1000/-home-vattanary-Documents-Personal-engineering-portfolio-template/c1c960b9-a04f-4717-aca9-4341434f4c6b/scratchpad/uwamit2.png http://localhost:8931/projects/uwamit.html)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

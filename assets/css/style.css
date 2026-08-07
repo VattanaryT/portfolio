@@ -570,8 +570,15 @@ main {
 
 .project-page .gallery {
   display: grid;
+  /* Without explicit columns this collapses to a single full-width stack,
+     which letterboxes every image and buries the text below the fold. */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.project-page .gallery.gallery-single {
+  grid-template-columns: 1fr;
 }
 
 .project-page .gallery img,
@@ -615,6 +622,26 @@ main {
 .project-page .detail-section ul {
   color: var(--text-muted);
   font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.project-page .detail-section ul {
+  padding-left: 1.25rem;
+}
+
+.project-page .detail-section li {
+  margin-bottom: 0.5rem;
+}
+
+.project-page .detail-section li:last-child,
+.project-page .detail-section > *:last-child {
+  margin-bottom: 0;
+}
+
+.project-page .detail-section .callout,
+.project-page .detail-section .table-scroll {
+  margin-bottom: 1rem;
 }
 
 .project-page .back-link {

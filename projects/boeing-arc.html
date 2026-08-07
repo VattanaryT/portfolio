@@ -65,17 +65,20 @@
     <section class="detail-section">
       <h2>Fix 1 — a two-curve probe geometry</h2>
       <p>
-        The existing flat end-effector cannot maintain a consistent standoff
-        distance across a curved surface: the gap between transducer and part
-        varies with position, which changes the time-of-flight and therefore where
-        the echo appears in the gate. That variation is what was reading as a
-        defect.
+        The parts being inspected do not have a fixed radius — the curvature
+        varies continuously along the surface. That is what breaks the existing
+        probe. A flat end-effector has one standoff distance that is only correct
+        on a flat part, and a single-radius curved probe is only correct where the
+        part happens to match its radius. Everywhere else, the gap between
+        transducer and part changes with position, which changes the acoustic
+        time-of-flight and moves where the echo lands in the inspection gate.
+        That shift is what was being read as a defect.
       </p>
       <p>
-        I designed a novel <strong>two-curve probe</strong> — curvature in two
-        planes rather than one — so the standoff stays consistent across
-        doubly-curved composite geometry rather than only along a single sweep
-        direction. Design work in SolidWorks with GD&amp;T and FEA, constrained to
+        I designed a novel <strong>two-curve probe</strong>, whose geometry
+        accommodates a range of surface radii rather than assuming one, so the
+        standoff stays within tolerance as the part's curvature changes underneath
+        it. Design work in SolidWorks with GD&amp;T and FEA, constrained to
         CNC-machinable geometry so it could actually be produced; I compared it
         against the prior flat and single-curve concepts, coordinated fabrication,
         inspected first articles, and validated by scan testing.

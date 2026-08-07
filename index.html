@@ -121,9 +121,10 @@
         increasingly, the reward signal it trains against.
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> I lead the system end to end — I design and fabricate the end-effectors and tooling for both arms, run the teleoperation data collection, train the policies, and evaluate them on the real hardware.</li>
-        <li><strong>How it works:</strong> ACT and Diffusion Policy (LeRobot, ROS2) generate the motion; real-time impedance control makes contact safe and compliant; the profilometer closes the loop on quality.</li>
-        <li><strong>Status:</strong> Research in preparation for publication. Building DSRL infrastructure so profilometer feedback becomes a learned reward rather than an offline score.</li>
+        <li><strong>My role:</strong> I lead the system end to end — I design and fabricate the end-effectors and tooling for both arms, collect the demonstrations, write the controller, train the policies, and evaluate them on the real hardware.</li>
+        <li><strong>How it works:</strong> A UR5e on a vertical rail (7 DoF) carries an end-effector modeled on the hand tool a technician actually uses. I collected 500+ GELLO teleoperated demonstrations across varied tools, strip sizes, and mold shapes, and run them through ACT and Diffusion Policy (LeRobot, ROS2) under a custom impedance-style PD controller.</li>
+        <li><strong>What I found:</strong> Diffusion Policy clearly beats ACT here, because there is more than one valid way to lay a strip down and a policy that regresses to the mean of two good strategies produces a third one that fails.</li>
+        <li><strong>Current work:</strong> Rewriting the impedance controller to operate on the mold's curved surface rather than in world coordinates — separating tangential twist commands from normal-axis force, so the same policy transfers across mold geometries.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>ACT</span><span>Diffusion Policy</span><span>Impedance Control</span><span>UR5e</span><span>ROS2</span></span>
@@ -135,7 +136,7 @@
     <article class="project-block" id="amazon-robotics">
       <div class="project-block-header">
         <div>
-          <h3>Finding a Month-Old Failure in a Production Robotic Vision System</h3>
+          <h3>Debugging a Robotic Vision System in Production</h3>
           <p class="project-block-role">Amazon Robotics · Robotics Data Scientist Intern · Sep – Dec 2025</p>
         </div>
       </div>
@@ -144,16 +145,17 @@
       </div>
       <p class="project-block-summary">
         A robotic vision system in production was failing intermittently, and had
-        been for a month, with no identified cause. It was too rare to reproduce on
-        demand and too frequent to ignore. Rather than keep debugging it as a
-        software problem, I treated millions of logged cycles as a statistics
-        problem — testing which conditions the failures were <em>not</em>
-        independent of — and isolated the root cause in under two weeks.
+        been for about a month with no identified cause — too rare to reproduce on
+        demand, too frequent to ignore, and direct debugging had already stalled.
+        Rather than keep chasing individual traces, I treated the production logs
+        as a statistics problem: not "what went wrong here" but "which conditions
+        are the failures not independent of."
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Owned the investigation independently, then built the monitoring that catches the next one.</li>
-        <li><strong>How it works:</strong> Chi-square and independence testing across production cycle logs; cross-model consistency metrics comparing the segmentation, depth, and dimension pipelines against each other; scalable Python pipelines over AWS S3 and SQL.</li>
-        <li><strong>Outcome:</strong> Root cause isolated &gt;50% faster than the prior effort, directly unblocking the engineering fix; the consistency metrics became a production monitoring framework for threshold tuning and alerting.</li>
+        <li><strong>My role:</strong> Owned the investigation, then contributed to the monitoring meant to catch the next one.</li>
+        <li><strong>How it works:</strong> Statistical independence testing over production-scale logs, plus consistency metrics between perception models — models observing the same scene are geometrically constrained, so their disagreement is a signal you get without labels.</li>
+        <li><strong>Outcome:</strong> Root cause isolated in under two weeks, unblocking the engineering fix.</li>
+        <li><strong>Note:</strong> Confidential work — described at a deliberately high level.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>Perception</span><span>Statistical Testing</span><span>Python</span><span>AWS S3</span><span>SQL</span></span>
@@ -182,13 +184,14 @@
         the ultrasound it generates — which only produces an image if the laser
         pulse and the ultrasound acquisition are synchronized to within
         microseconds. GE HealthCare wanted this running on a commercial scanner
-        they already sell. I owned the mechanical payload that carries the optics
-        and the timing system that keeps the two modalities in step, from blank
-        CAD through a validated prototype.
+        they already sell. I owned the mechanical payload that carries the optics,
+        and built the position-synchronized triggering that lets both modalities
+        run at once — which the platform had no mechanism for — from blank CAD
+        through a validated prototype.
       </p>
       <ul class="project-block-bullets">
         <li><strong>My role:</strong> Full mechanical design lifecycle plus the timing subsystem — SolidWorks parts under coupled optical, thermal, and mechanical constraints, GD&amp;T per ASME Y14.5, sub-mm tolerance stack-up, first-article inspection, and integration.</li>
-        <li><strong>The hard part:</strong> Laser-fiber synchronization failed at 3000 RPM. I isolated the fault across the mechanical, electrical, and software layers, then redesigned the 1000 Hz pulse-timing mechanism (Python, UART, Aerotech position-synchronized output).</li>
+        <li><strong>The hard part:</strong> Firing the laser at known angular positions on a stage spinning at 17,400 deg/s — a capability the platform simply didn't have. I built it by triggering off the encoder (Aerotech position-synchronized output) rather than a clock, plus the 1000 Hz acquisition path in Python over UART.</li>
         <li><strong>Outcome:</strong> Met clinical-grade image resolution targets without extending the timeline; co-authored publication at SPIE Photonics West 2025.</li>
       </ul>
       <div class="project-block-footer">
@@ -222,7 +225,7 @@
       </p>
       <ul class="project-block-bullets">
         <li><strong>My role:</strong> Diagnosis through delivered hardware — I found the root causes, designed the replacement probe, coordinated fabrication, inspected first articles, and validated it by scan testing.</li>
-        <li><strong>How it works:</strong> FFT analysis of the scan signal isolated two artifact sources; a novel two-curve probe geometry (SolidWorks, GD&amp;T, FEA, CNC-machinable) eliminated the geometric one; a redesigned fixture fixed the coupling one. I also implemented Boustrophedon cell decomposition for robot scan coverage.</li>
+        <li><strong>How it works:</strong> FFT analysis of the scan signal isolated two artifact sources; a novel two-curve probe geometry (SolidWorks, GD&amp;T, FEA, CNC-machinable) holds standoff across surfaces whose radius varies continuously; a redesigned fixture fixed the water-coupling one. I also implemented Boustrophedon cell decomposition for robot scan coverage.</li>
         <li><strong>Outcome:</strong> Geometry-induced artifacts eliminated; 40% better water retention, improving defect-detection reliability and SNR.</li>
       </ul>
       <div class="project-block-footer">
@@ -268,7 +271,7 @@
       <div class="project-block-header">
         <div>
           <h3>Closing the Loop on a Self-Driving Materials Lab</h3>
-          <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant</p>
+          <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant · Sep 2024 – Apr 2025</p>
         </div>
       </div>
       <div class="stack-bar">
