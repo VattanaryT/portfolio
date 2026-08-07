@@ -3,59 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UW Sun Lab — Vattanary Tevy</title>
+  <title>Self-Driving Materials Lab (MARA) — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>UW Sun Lab</h1>
-      <p class="role">Systems Engineering & Machine Learning Research Assistant</p>
+      <h1>Closing the Loop on a Self-Driving Materials Lab</h1>
+      <p class="role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant</p>
     </div>
 
     <div class="gallery">
-      <img src="../assets/img/mara_architecture.png" alt="MARA architecture" />
+      <img src="../assets/img/mara_architecture.png" alt="MARA system architecture" />
       <video src="../assets/img/mara_demo.MOV" muted playsinline loop autoplay></video>
-      <img src="../assets/img/mara_workflow.png" alt="MARA workflow" />
+      <img src="../assets/img/mara_workflow.png" alt="MARA experiment workflow" />
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Self-driving lab work: Latin Hypercube Sampling (LHS) on Opentrons (96 samples), computer vision for the first iteration, and comparison across iterations and batch sizes. Pipeline toward full automation and color concentration (e.g. black) feedback.</p>
+      <h2>What a self-driving lab is, and where this one stalled</h2>
+      <p>
+        A self-driving lab runs the scientific loop without a human in it: choose
+        the next formulation to try, mix it, deposit it, measure the result, update
+        beliefs, choose again. The value is throughput — the loop can run
+        continuously and explore a parameter space far faster than a graduate
+        student can.
+      </p>
+      <p>
+        This lab could do every step except the measurement. Sample concentration
+        was still assessed by a person looking at the samples. That single manual
+        step converted a continuous autonomous loop into a batch process gated on
+        human availability: the robot would run, then wait, sometimes overnight,
+        for someone to come tell it what had happened. The bottleneck was not
+        throughput of any component; it was the fact that the loop was open.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Methods & workflow</h2>
+      <h2>Closing it with vision</h2>
+      <p>
+        I built a real-time computer vision pipeline that reads concentration
+        directly from sample color and feeds it back into the deposition workflow,
+        replacing the manual spot-check.
+      </p>
+      <p>
+        The approach works because the underlying relationship is physical rather
+        than learned from scratch — optical absorbance rises with concentration, so
+        RGB response carries a usable signal without needing a large labeled
+        dataset. That made the sensing problem tractable; what made it hard was
+        everything around the signal:
+      </p>
       <ul>
-        <li><strong>LHS on Opentrons</strong> — 96-sample design for efficient exploration</li>
-        <li><strong>CV for first iteration</strong> — Computer vision to assess and drive next steps</li>
-        <li><strong>Comparison</strong> — Iterations, batch sizes, and performance metrics</li>
+        <li><strong>Lighting —</strong> the camera measures reflected light, so ambient variation looks identical to a concentration change unless it is controlled or calibrated out.</li>
+        <li><strong>Cross-contamination —</strong> carryover between wells corrupts the reading and, worse, corrupts it in a way that looks like a plausible measurement rather than an obvious fault.</li>
+        <li><strong>Stock depletion —</strong> the system needs to notice it is running out of a reagent before it silently produces a plate of bad samples.</li>
       </ul>
+      <p>
+        In an autonomous loop these are not edge cases. A wrong measurement does
+        not just produce a wrong data point — it steers the next experiment, so the
+        error compounds into the sampling strategy.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Next steps & considerations</h2>
-      <ul>
-        <li>Automation: experiment with parameters for CV; import pyODE for LHS; Arducam integration; retrieve data from CV and reiterate</li>
-        <li>Color concentration (e.g. black) as a control or feedback signal</li>
-        <li>Stock threshold when running out of material; cross-contamination and noise handling</li>
-      </ul>
+      <h2>Experiment design</h2>
+      <p>
+        For exploring the formulation space I used Latin Hypercube Sampling across
+        a 96-sample Opentrons plate. LHS stratifies each parameter so that the
+        samples cover the range evenly in every dimension, which gets far better
+        coverage than random sampling at a fixed budget — and when each sample
+        costs real reagent and real machine time, the budget is the binding
+        constraint. I also compared results across iterations and batch sizes to
+        characterize how the pipeline behaved as the loop ran.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
-      <ul>
-        <li>Diagnosed the manual measurement bottleneck in the self-driving materials lab; built and deployed a real-time computer vision pipeline for closed-loop concentration monitoring.</li>
-        <li>Replaced manual spot-checks with continuous automated feedback to directly accelerate materials discovery cycles.</li>
-        <li>Collaborated cross-functionally with chemists and engineers to validate system performance and drive adoption into active deposition workflows.</li>
-      </ul>
+      <h2>Getting it adopted</h2>
+      <p>
+        The pipeline only mattered if the chemists trusted it enough to let it
+        drive real depositions. I worked directly with them and with the other
+        engineers to validate performance against the manual measurements it was
+        replacing, which is what moved it from a demo into the active deposition
+        workflow.
+      </p>
+      <div class="callout">
+        <strong>Why this belongs next to the robot work:</strong> it is the same
+        structure as a manipulation policy — perception producing a state estimate,
+        that estimate driving actuation, and the quality of the estimate setting
+        the ceiling on the whole loop. The failure mode is also the same: a
+        confident wrong measurement is more dangerous than a missing one.
+      </div>
     </section>
 
-    <a href="../index.html#sun-lab" class="back-link">← Maker portfolio</a>
+    <a href="../index.html#sun-lab" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

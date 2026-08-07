@@ -3,58 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>uWAMIT — Vattanary Tevy</title>
+  <title>Photoacoustic-Ultrasound Payload — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>uWAMIT — Ultrasound-based Washington Molecular Imaging & Therapy Center</h1>
-      <p class="role">Mechatronics Research Assistant</p>
+      <h1>A Clinical Imaging Payload Where Timing Is Measured in Microseconds</h1>
+      <p class="role">uWAMIT — UW Molecular Imaging &amp; Therapy Center, with GE HealthCare · Mechanical Design &amp; Mechatronics Researcher · Jun 2024 – Mar 2025</p>
     </div>
 
     <div class="gallery">
-      <img src="../assets/img/paus_cad.png" alt="PAUS CAD" />
-      <img src="../assets/img/paus_partial_cad.png" alt="PAUS partial CAD" />
-      <img src="../assets/img/paus_system.png" alt="PAUS system" />
+      <img src="../assets/img/paus_cad.png" alt="PAUS payload CAD assembly" />
+      <img src="../assets/img/paus_partial_cad.png" alt="PAUS optical subsystem CAD" />
+      <img src="../assets/img/paus_system.png" alt="Assembled PAUS system" />
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Mechatronics and software for photoacoustic-ultrasound imaging: Python API/GUI for user control, CAD for hardware encasing, and PSO (Position Synchronized Output) trigger design to sync laser pulses with ultrasound scanning.</p>
+      <h2>What photoacoustic imaging demands of the hardware</h2>
+      <p>
+        Photoacoustic imaging fires a nanosecond laser pulse into tissue. The
+        tissue absorbs it, heats by a fraction of a degree, expands, and emits an
+        ultrasound wave. Read that wave with an ultrasound probe and you get an
+        image whose contrast comes from optical absorption — so you can see things
+        like blood oxygenation that pure ultrasound cannot show.
+      </p>
+      <p>
+        The catch is that the image only reconstructs if you know precisely
+        <em>when</em> the laser fired relative to when the ultrasound array started
+        listening. Sound travels roughly 1.5 mm per microsecond in tissue, so a
+        microsecond of timing error is a millimeter of spatial error. Timing
+        accuracy is not a performance nicety here; it is the resolution of the
+        instrument.
+      </p>
+      <p>
+        The project's goal made this harder: rather than build a bespoke research
+        rig, GE HealthCare wanted this modality running on a <strong>commercial
+        scanner they already sell</strong>. That meant designing a payload that
+        fits an existing product's mechanical and electrical envelope, and
+        achieving clinical-grade validation rather than a working demo.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Python API and CAD</h2>
+      <h2>Mechanical design under coupled constraints</h2>
+      <p>
+        I owned the full mechanical design lifecycle of the payload. The design
+        problem is that the optical, thermal, and mechanical requirements are not
+        separable:
+      </p>
       <ul>
-        <li>Wrote Python GUI using hardware API, including all necessary components for the user workflow</li>
-        <li>Designed AC/DC power supply encasing and cable clips (CAD)</li>
+        <li><strong>Optical —</strong> fiber output and the ultrasound array must hold alignment, because relative position between illumination and reception is baked into the reconstruction.</li>
+        <li><strong>Thermal —</strong> laser delivery deposits heat, and thermal expansion moves the very geometry the optics depend on.</li>
+        <li><strong>Mechanical —</strong> the assembly is handheld and scanning, so it takes real loads while holding sub-millimeter relationships.</li>
       </ul>
+      <p>
+        Work included SolidWorks parts and assemblies, GD&amp;T per ASME Y14.5,
+        sub-millimeter tolerance stack-up analysis, first-article inspection of
+        fabricated parts, and full subsystem integration — plus the AC/DC power
+        supply enclosure and cable management that make the thing usable in a
+        clinical setting rather than a lab bench.
+      </p>
+      <p>
+        Tolerance stack-up mattered more than usual: alignment is enforced by the
+        accumulated tolerances of the parts between the fiber and the array, so the
+        stack-up analysis <em>is</em> the image quality budget.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>PSO trigger for photoacoustic imaging</h2>
-      <ul>
-        <li>Used Aerotech motor software and stage to output precise laser pulses for photoacoustic imaging, run concurrently with ultrasound scanning</li>
-        <li>Ran motor at 17,400 deg/s (2,900 rpm) while determining PSO trigger output</li>
-        <li>Trigger timing based on total fixed time, ON time, and number of pulses</li>
-      </ul>
+      <h2>The synchronization failure at 3000 RPM</h2>
+      <p>
+        The system uses a rotating stage to sweep illumination. At 3000 RPM
+        (17,400 deg/s), laser-fiber synchronization failed and image resolution
+        degraded.
+      </p>
+      <p>
+        Faults like this are expensive because the symptom appears in the image,
+        which is the last stage of a chain that crosses three engineering domains.
+        Mechanical runout, electrical trigger latency, and software timing jitter
+        all produce the same blur. I isolated it by testing the layers separately
+        rather than guessing — characterizing each independently so the domain
+        could be identified before anything was redesigned.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
+      <h2>Position-synchronized triggering</h2>
+      <p>
+        The fix was to stop triggering the laser on <em>time</em> and start
+        triggering it on <em>position</em>. Using the Aerotech stage's
+        Position Synchronized Output, the controller fires pulses off the encoder
+        itself, so a pulse is emitted when the stage physically reaches an angle
+        rather than when a timer expires.
+      </p>
+      <p>
+        This removes the entire error path: velocity ripple, control-loop lag, and
+        host-side scheduling jitter no longer displace the pulse, because the
+        encoder is the source of truth for both the firing and the reconstruction.
+        I implemented the trigger configuration — total fixed time, ON time, and
+        pulse count — and the Python control layer over UART, driving a 1000 Hz
+        multimodal acquisition (fiber optics, laser timing, ultrasound) with
+        custom Automation1 scripts, plus the Python API and operator GUI for the
+        full workflow.
+      </p>
+      <div class="callout">
+        <strong>The general lesson:</strong> when a timing requirement is really a
+        geometric requirement, derive the trigger from the position sensor instead
+        of the clock. The same reasoning applies to camera-to-actuator
+        synchronization in any robot that has to act on what it saw at a
+        specific pose.
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Outcome</h2>
       <ul>
-        <li>Partnered with GE HealthCare; scoped requirements, designed and 3D-printed custom optical and mechanical subsystems, and managed integration timelines against clinical-grade performance targets.</li>
-        <li>Resolved laser-timing jitter at 1000 Hz that was degrading image resolution: designed a pulse synchronization mechanism and validated it through iterative subsystem testing to meet clinical-grade targets.</li>
-        <li>Python API/GUI for user control; CAD for power supply encasing and cable clips; PSO (Position Synchronized Output) trigger to sync laser pulses with ultrasound scanning. Contributed to 2 co-authored publications and a SPIE Photonics West presentation.</li>
+        <li>Concept through validated prototype, meeting clinical-grade image resolution targets — without extending the project timeline.</li>
+        <li>Structured V&amp;V and first-article inspection carried through to a system integrated on a commercial scanner.</li>
+        <li>Co-authored publication: R. Shang*, P. Lorraine, S. Smith, H. Chan, <strong>V. Tevy*</strong>, I. Pelivanov, M. O'Donnell, "Real-time spectroscopic PAUS imaging integrated on a commercial scanner," <em>SPIE Photonics West</em>, Jan 2025. (* equal contribution)</li>
       </ul>
     </section>
 
-    <a href="../index.html#uwamit" class="back-link">← Maker portfolio</a>
+    <a href="../index.html#uwamit" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

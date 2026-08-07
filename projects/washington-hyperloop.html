@@ -9,42 +9,118 @@
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Washington Hyperloop</h1>
-      <p class="role">Controls Engineer & Executive Director</p>
+      <h1>A Tunnel Boring Machine, 45 Engineers, and a Fixed Deadline</h1>
+      <p class="role">Washington Hyperloop · Executive Director &amp; Electromechanical Systems Engineer · Jan 2024 – Apr 2025</p>
     </div>
 
     <div class="gallery">
-      <img src="https://placehold.co/800x500/e8e8e8/5c5c5c?text=Figma+GUI+Pages" alt="6 GUI pages designed in Figma" />
-      <img src="https://placehold.co/800x500/e8e8e8/5c5c5c?text=E-stop+Manual+Start" alt="Emergency stop and manual start button" />
+      <img src="../assets/img/final_tbm.png" alt="Completed tunnel boring machine" />
+      <img src="../assets/img/tbm_site.png" alt="Competition tunneling site" />
+      <img src="../assets/img/tbm_site2.png" alt="Tunneling site operations" />
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Controls and UX for the Washington Hyperloop pod: GUI design for operators and engineers, and safety-critical hardware/software (emergency stop, manual start) using relay module, motor driver, and ESP32 programmed in C++.</p>
+      <h2>The constraint</h2>
+      <p>
+        Build a working tunnel boring machine from nothing, with a student team,
+        and run it at The Boring Company's national competition on a date that
+        does not move. The budget was $20K and the team was 45+ engineers across 5
+        subteams.
+      </p>
+      <p>
+        A TBM is an unusually unforgiving first project because it is genuinely
+        multi-domain and the domains fail into each other. Cutterhead motors,
+        slurry pumps, sensing, firmware, and a telemetry server all have to work
+        simultaneously, underground, where nothing is accessible once it is
+        running.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>GUI (Figma)</h2>
-      <ul>
-        <li>Designed 6 GUI pages in Figma with necessary information for sensors and other components</li>
-        <li>Considered operator workflow and at-a-glance status for controls and telemetry</li>
-      </ul>
+      <h2>Two jobs at once</h2>
+      <p>
+        I was both Executive Director and the engineer who owned the
+        electromechanical control system. That is worth stating plainly because
+        the combination is what made it work: the person setting the ME/EE/firmware
+        schedule was the same person integrating those three domains at 2am, so
+        the schedule reflected what integration actually costs rather than what
+        each subteam estimated in isolation.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Emergency stop & manual start</h2>
+      <h2>The control system</h2>
+      <div class="table-scroll">
+        <table class="spec-table">
+          <tr>
+            <th>Controller</th>
+            <td>ESP32, firmware in Embedded C.</td>
+          </tr>
+          <tr>
+            <th>Actuation</th>
+            <td>Motor drivers for the cutterhead and drive systems; pump controllers for slurry handling.</td>
+          </tr>
+          <tr>
+            <th>Buses</th>
+            <td>UART and I2C between the controller and peripherals.</td>
+          </tr>
+          <tr>
+            <th>Telemetry</th>
+            <td>Python data server providing live sensor state to operators at the surface.</td>
+          </tr>
+          <tr>
+            <th>Safety</th>
+            <td>Emergency stop and manual start paths designed for low-latency, fail-safe response — E-stop cuts power through a relay path rather than depending on firmware to be alive and responsive.</td>
+          </tr>
+        </table>
+      </div>
+      <p>
+        Built from scratch, on a $20K budget covering the entire machine, with the
+        operator interface designed around at-a-glance status: an operator who
+        cannot see the machine has only the telemetry, so the display has to make
+        an abnormal state obvious without requiring interpretation.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Integration failures were the real work</h2>
+      <p>
+        The recurring problems were not within any subteam — they appeared at the
+        seams between mechanical, electrical, and software. This is the standard
+        pathology of multi-domain student projects: each subteam validates its own
+        part in isolation, all three pass, and the assembled system fails, at which
+        point every subteam has evidence that the problem is somebody else's.
+      </p>
+      <p>
+        I ran structured root-cause analysis across those boundaries and drove the
+        corrective actions through the subteams, which is what got the machine
+        through the competition's mechanical, electrical, and software inspections.
+        I was also the primary liaison to The Boring Company, translating their
+        external technical requirements into internal design constraints — so that
+        requirements arrived as specific things a subteam could design against,
+        rather than as a document to be interpreted five different ways.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Outcome</h2>
       <ul>
-        <li>Emergency stop and manual start button implementation</li>
-        <li>Hardware: relay module, motor driver, ESP32</li>
-        <li>Firmware written in C++ for reliable, low-latency response</li>
+        <li>Zero control-system failures at the national competition.</li>
+        <li>Passed all mechanical, electrical, and software inspections.</li>
+        <li>Won the Cutterhead Mini-Competition.</li>
+        <li>Delivered on schedule with no budget overrun.</li>
       </ul>
     </section>
 
-    <a href="../index.html#hyperloop" class="back-link">← Maker portfolio</a>
+    <a href="../index.html#hyperloop" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vattanary Tevy — Robotics & ML Engineer</title>
+  <title>Vattanary Tevy — Full-Stack Robotics Engineer</title>
+  <meta name="description" content="Robotics engineer working across the full loop — end-effector hardware, sensing, real-time control, and learned manipulation policies deployed on real robots." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <header>
     <a href="index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#publications">Publications</a>
+      <a href="resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
@@ -18,245 +24,386 @@
         <h1 style="margin-top: 0.75em; text-align: center;">Vattanary Tevy</h1>
       </div>
       <div class="hero-right">
-        <section class="about-section about-compact">
-          <h2>Summary</h2>
-          <ul>
-            <li>Robotics Reinforcement Learning Researcher at UW WEIRD Lab, working on RL for dexterous robots, carbon fiber layup, and teleoperation data for imitation learning</li>
-            <li>Expertise in robotics & RL, machine learning & data science, software (perception, data pipelines, automation), and mechanical design & mechatronics</li>
-            <li>Experience in self-driving labs, medical imaging systems, automation, and controls</li>
-          </ul>
-        </section>
-        <section class="about-section about-compact">
-          <h2>Focus areas</h2>
-          <div class="focus-tags">
-            <span>Robotics & RL</span>
-            <span>Machine Learning</span>
-            <span>Data Science</span>
-            <span>Control Systems</span>
-            <span>Software & Automation</span>
-            <span>Mechanical Design</span>
-            <span>Mechatronics</span>
-            <span>Computer Vision</span>
-          </div>
-        </section>
-        <section class="about-section about-compact">
-          <h2>Honors & awards</h2>
-          <p>Amazon Robotics Fellowship</p>
-        </section>
-        <section class="about-section about-compact">
-          <h2>Education</h2>
-          <p><strong>M.Eng. Mechanical Engineering</strong> — Data Science, Mechatronics · University of Washington · 2024–2026</p>
-          <p><strong>B.E. Mechanical Engineering</strong> — Mechatronics · University of Washington · 2022–2024</p>
-        </section>
-        <section class="about-section about-compact">
-          <h2>Contact</h2>
-          <p class="contact-inline">
-            <a href="mailto:vtevy@uw.edu">vtevy@uw.edu</a>
-            <a href="https://www.linkedin.com/in/vattanary-tevy" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://github.com/VattanaryT" target="_blank" rel="noopener">GitHub</a>
-          </p>
-        </section>
+        <p class="positioning">
+          I build robots that learn to do physical work — and I own the whole loop:
+          <strong>the end-effector I design in CAD, the sensors I mount on it, the
+          controller that runs it, and the policy that decides what it does next.</strong>
+          My background is mechanical, so I care about the part most learning
+          people skip: whether the hardware is actually good enough for a policy
+          to succeed on.
+        </p>
+        <p class="positioning" style="font-size: 0.95rem; color: var(--text-muted);">
+          Currently at UW's WEIRD Lab, where I lead a bimanual carbon-fiber layup
+          system on two UR5e arms — I designed the end-effectors, collect the
+          teleoperation data, train the manipulation policies, and run them on the
+          real robot. Amazon Robotics Research Fellow.
+        </p>
+
+        <p class="contact-inline">
+          <a href="mailto:vtevy@uw.edu">vtevy@uw.edu</a>
+          <a href="https://www.linkedin.com/in/vattanary-tevy" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/VattanaryT" target="_blank" rel="noopener">GitHub</a>
+          <a href="resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        </p>
       </div>
     </section>
 
-    <h2 class="page-title">Maker Portfolio</h2>
-    <p class="page-subtitle">Projects across automation, mechatronics, controls, and mechanical design.</p>
+    <section class="about-section">
+      <h2>Across the loop</h2>
+      <div class="skill-groups">
+        <dl class="skill-group">
+          <dt>Hardware</dt>
+          <dd>SolidWorks (CSWA), GD&amp;T (ASME Y14.5), sub-mm tolerance stack-up, FEA, end-effector &amp; fixture design, FDM/SLA, CNC-machinable geometry</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Sensing</dt>
+          <dd>Laser profilometry, force/contact sensing, multimodal sensor fusion, DAQ integration, ESP32 / Embedded C, UART · I2C · SPI</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Control</dt>
+          <dd>Real-time impedance control, MPPI / MPC, HJI reachability, ROS2, kinematics &amp; FK/IK</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Robot learning</dt>
+          <dd>ACT, Diffusion Policy, imitation learning, DSRL &amp; reward design, PyTorch (CUDA), LeRobot</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Deployment</dt>
+          <dd>Sim-to-real transfer, MuJoCo, teleop data pipelines, closed-loop hardware evaluation &amp; benchmarking</dd>
+        </dl>
+      </div>
+    </section>
 
-    <!-- WEIRD Lab -->
+    <div class="info-grid">
+      <section class="about-section">
+        <h2>Education</h2>
+        <p><strong>M.S. Mechanical Engineering</strong><br />Data Science &amp; Mechatronics · University of Washington · expected Jun 2026</p>
+        <p><strong>B.S. Mechanical Engineering</strong><br />Mechatronics &amp; Applied Mathematics · University of Washington · Jun 2024</p>
+      </section>
+
+      <section class="about-section">
+        <h2>Honors</h2>
+        <p>Amazon Robotics Research Fellowship<br />University of Washington, 2024–2025</p>
+        <p>The Social Justice Award (Ethics)<br />University of Washington, 2024</p>
+      </section>
+    </div>
+
+    <h2 class="page-title" id="work">Selected work</h2>
+    <p class="page-subtitle">
+      Each project is tagged by the parts of the robotics stack it covers, from
+      mechanical design through policy deployment. Click through for the
+      technical implementation.
+    </p>
+
+    <!-- 1. WEIRD Lab — flagship -->
     <article class="project-block" id="weird-lab">
       <div class="project-block-header">
         <div>
-          <h3>Washington Embodied Intelligence and Robotics Development Lab (WEIRD Lab)</h3>
-          <p class="project-block-role">Robotics & RL Research</p>
+          <h3>Teaching Two Robot Arms to Lay Up Carbon Fiber</h3>
+          <p class="project-block-role">WEIRD Lab, University of Washington · Robotics Researcher &amp; Amazon Robotics Research Fellow · Jan 2026 – present</p>
         </div>
+      </div>
+      <div class="stack-bar">
+        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
       <div class="project-block-visuals img-2">
-        <img src="assets/img/geodude_teleop.png" alt="Teleop demonstration" />
+        <img src="assets/img/geodude_teleop.png" alt="Teleoperation setup for collecting layup demonstrations" />
         <video src="assets/img/right_wrist.mp4" muted playsinline loop autoplay></video>
       </div>
+      <p class="project-block-summary">
+        Laying carbon fiber into a mold is done by hand because success depends on
+        contact forces a skilled technician feels but can't write down — press too
+        hard and the ply distorts, too soft and it wrinkles. I'm building a
+        two-armed robot that learns the motion from human demonstrations instead of
+        from a spec: the right arm performs the layup, and the left arm carries a
+        laser profilometer that scans the surface afterward and measures how badly
+        it wrinkled. That measurement is both the grade for the policy and,
+        increasingly, the reward signal it trains against.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Implement and evaluate imitation learning and RL-based control policies for dexterous robotic manipulation (carbon fiber layup tasks) using ROS2 in Linux and Hugging Face’s LeRobot.</li>
-        <li><strong>Result:</strong> Own data collection pipeline design, model training, evaluation benchmarking, and closed-loop hardware testing.</li>
-        <li><strong>How:</strong> Collect and process multimodal teleoperation demonstration data (position, force, contact) for policy training; implement rapid experiment cycles to identify failure modes, iterate on model architectures, and characterize sim-to-real transfer performance.</li>
+        <li><strong>My role:</strong> I lead the system end to end — I design and fabricate the end-effectors and tooling for both arms, run the teleoperation data collection, train the policies, and evaluate them on the real hardware.</li>
+        <li><strong>How it works:</strong> ACT and Diffusion Policy (LeRobot, ROS2) generate the motion; real-time impedance control makes contact safe and compliant; the profilometer closes the loop on quality.</li>
+        <li><strong>Status:</strong> Research in preparation for publication. Building DSRL infrastructure so profilometer feedback becomes a learned reward rather than an offline score.</li>
       </ul>
-      <p class="project-block-caption">Embodied AI, robotics, and reinforcement learning.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>RL</span><span>Robotics</span><span>Teleop</span></span>
-        <a href="projects/weird-lab.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>ACT</span><span>Diffusion Policy</span><span>Impedance Control</span><span>UR5e</span><span>ROS2</span></span>
+        <a href="projects/weird-lab.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
 
-    <!-- 1. Powerlight Technologies -->
-    <article class="project-block" id="powerlight">
+    <!-- 2. Amazon Robotics -->
+    <article class="project-block" id="amazon-robotics">
       <div class="project-block-header">
         <div>
-          <h3>Powerlight Technologies</h3>
-          <p class="project-block-role">PV testing & automation</p>
+          <h3>Finding a Month-Old Failure in a Production Robotic Vision System</h3>
+          <p class="project-block-role">Amazon Robotics · Robotics Data Scientist Intern · Sep – Dec 2025</p>
         </div>
       </div>
-      <div class="project-block-visuals img-1">
-        <img src="assets/img/powerlight_setup.jpg" alt="PV test setup" />
+      <div class="stack-bar">
+        <span>Hardware</span><span class="on">Sensing</span><span>Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
+      <p class="project-block-summary">
+        A robotic vision system in production was failing intermittently, and had
+        been for a month, with no identified cause. It was too rare to reproduce on
+        demand and too frequent to ignore. Rather than keep debugging it as a
+        software problem, I treated millions of logged cycles as a statistics
+        problem — testing which conditions the failures were <em>not</em>
+        independent of — and isolated the root cause in under two weeks.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Manual testing bottleneck caused throughput losses and data inconsistencies.</li>
-        <li><strong>Result:</strong> End-to-end automated PV test system—eliminated manual steps, enabled continuous unattended runs; integrated into PLM/BOM, faster validation.</li>
-        <li><strong>How:</strong> Independently scoped, designed, and deployed from hardware selection through software commissioning.</li>
+        <li><strong>My role:</strong> Owned the investigation independently, then built the monitoring that catches the next one.</li>
+        <li><strong>How it works:</strong> Chi-square and independence testing across production cycle logs; cross-model consistency metrics comparing the segmentation, depth, and dimension pipelines against each other; scalable Python pipelines over AWS S3 and SQL.</li>
+        <li><strong>Outcome:</strong> Root cause isolated &gt;50% faster than the prior effort, directly unblocking the engineering fix; the consistency metrics became a production monitoring framework for threshold tuning and alerting.</li>
       </ul>
-      <p class="project-block-caption">High-speed cameras, InGaAs spectrometer, data-acquisition, PyQt GUI.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>PyQt</span><span>DAQ</span><span>Automation</span></span>
-        <a href="projects/powerlight.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>Perception</span><span>Statistical Testing</span><span>Python</span><span>AWS S3</span><span>SQL</span></span>
+        <a href="projects/amazon-robotics.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
 
-    <!-- 2. UW Sun Lab -->
-    <article class="project-block" id="sun-lab">
-      <div class="project-block-header">
-        <div>
-          <h3>UW Sun Lab</h3>
-          <p class="project-block-role">Systems Engineering & ML Research Assistant</p>
-        </div>
-      </div>
-      <div class="project-block-visuals">
-        <img src="assets/img/mara_architecture.png" alt="MARA architecture" />
-        <video src="assets/img/mara_demo.MOV" muted playsinline loop autoplay></video>
-        <img src="assets/img/mara_workflow.png" alt="MARA workflow" />
-      </div>
-      <ul class="project-block-bullets">
-        <li><strong>What:</strong> Manual measurement bottleneck in a self-driving materials lab.</li>
-        <li><strong>Result:</strong> Real-time computer vision pipeline for closed-loop concentration monitoring; replaced manual spot-checks and accelerated materials discovery.</li>
-        <li><strong>How:</strong> Collaborated with chemists and engineers to validate performance and drive adoption into active deposition workflows.</li>
-      </ul>
-      <p class="project-block-caption">LHS (96 samples), CV for first iteration, automation & color concentration pipeline.</p>
-      <div class="project-block-footer">
-        <span class="project-block-tags"><span>ML</span><span>Opentrons</span><span>Computer Vision</span></span>
-        <a href="projects/sun-lab.html" class="project-block-link">Details →</a>
-      </div>
-    </article>
-
-    <!-- 3. uWAMIT -->
+    <!-- 3. uWAMIT / PAUS -->
     <article class="project-block" id="uwamit">
       <div class="project-block-header">
         <div>
-          <h3>uWAMIT — Ultrasound-based Washington Molecular Imaging & Therapy</h3>
-          <p class="project-block-role">Mechatronics Research Assistant</p>
+          <h3>A Clinical Imaging Payload Where Timing Is Measured in Microseconds</h3>
+          <p class="project-block-role">uWAMIT — UW Molecular Imaging &amp; Therapy Center, with GE HealthCare · Mechanical Design &amp; Mechatronics Researcher · Jun 2024 – Mar 2025</p>
         </div>
       </div>
-      <div class="project-block-visuals">
-        <img src="assets/img/paus_cad.png" alt="PAUS CAD" />
-        <img src="assets/img/paus_partial_cad.png" alt="PAUS partial CAD" />
-        <img src="assets/img/paus_system.png" alt="PAUS system" />
+      <div class="stack-bar">
+        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span class="on">Deployment</span>
       </div>
+      <div class="project-block-visuals">
+        <img src="assets/img/paus_cad.png" alt="PAUS payload CAD assembly" />
+        <img src="assets/img/paus_partial_cad.png" alt="PAUS optical subsystem CAD" />
+        <img src="assets/img/paus_system.png" alt="Assembled PAUS system" />
+      </div>
+      <p class="project-block-summary">
+        Photoacoustic imaging works by firing a laser into tissue and listening to
+        the ultrasound it generates — which only produces an image if the laser
+        pulse and the ultrasound acquisition are synchronized to within
+        microseconds. GE HealthCare wanted this running on a commercial scanner
+        they already sell. I owned the mechanical payload that carries the optics
+        and the timing system that keeps the two modalities in step, from blank
+        CAD through a validated prototype.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Partnered with GE HealthCare to deliver a novel photoacoustic-ultrasound scanner.</li>
-        <li><strong>Result:</strong> Concept through validated prototype; resolved laser-timing jitter at 1000 Hz, met clinical-grade targets; SPIE publication.</li>
-        <li><strong>How:</strong> Scoped requirements, designed and 3D-printed custom optical/mechanical subsystems; pulse synchronization mechanism validated through iterative subsystem testing.</li>
+        <li><strong>My role:</strong> Full mechanical design lifecycle plus the timing subsystem — SolidWorks parts under coupled optical, thermal, and mechanical constraints, GD&amp;T per ASME Y14.5, sub-mm tolerance stack-up, first-article inspection, and integration.</li>
+        <li><strong>The hard part:</strong> Laser-fiber synchronization failed at 3000 RPM. I isolated the fault across the mechanical, electrical, and software layers, then redesigned the 1000 Hz pulse-timing mechanism (Python, UART, Aerotech position-synchronized output).</li>
+        <li><strong>Outcome:</strong> Met clinical-grade image resolution targets without extending the timeline; co-authored publication at SPIE Photonics West 2025.</li>
       </ul>
-      <p class="project-block-caption">Python API/GUI, CAD (power supply, cable clips). PSO trigger: Aerotech motor, 17400 deg/s, laser pulses for photoacoustic + ultrasound.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>Python</span><span>CAD</span><span>Aerotech</span><span>Photoacoustic</span></span>
-        <a href="projects/uwamit.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>SolidWorks</span><span>GD&amp;T</span><span>Real-Time Sync</span><span>Python</span><span>V&amp;V</span></span>
+        <a href="projects/uwamit.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
 
-    <!-- 4. Washington Tunneling -->
-    <article class="project-block" id="washington-tunneling">
-      <div class="project-block-header">
-        <div>
-          <h3>Washington Tunneling</h3>
-          <p class="project-block-role">Controls & systems</p>
-        </div>
-      </div>
-      <div class="project-block-visuals">
-        <img src="assets/img/final_tbm.png" alt="Final TBM" />
-        <img src="assets/img/tbm_site.png" alt="TBM site" />
-        <img src="assets/img/tbm_site2.png" alt="TBM site" />
-      </div>
-      <ul class="project-block-bullets">
-        <li><strong>What:</strong> Directed 5 subteams (45+ members) and $20K budget to deliver a first-of-a-kind tunneling system against a fixed national competition deadline.</li>
-        <li><strong>Result:</strong> Won Cutterhead Mini-Competition; passed all mechanical, electrical, and software inspections.</li>
-        <li><strong>How:</strong> Structured workstreams and milestones; diagnosed ME/EE/SW integration failures with root-cause analysis; primary liaison to The Boring Company—translated requirements into design constraints.</li>
-      </ul>
-      <p class="project-block-caption">Tunneling club controls and site systems.</p>
-      <div class="project-block-footer">
-        <span class="project-block-tags"><span>Controls</span><span>ESP32</span></span>
-        <a href="projects/washington-tunneling.html" class="project-block-link">Details →</a>
-      </div>
-    </article>
-
-    <!-- 5. Boeing ARC -->
+    <!-- 4. Boeing ARC -->
     <article class="project-block" id="boeing-arc">
       <div class="project-block-header">
         <div>
-          <h3>Boeing Advanced Research Center (BARC)</h3>
-          <p class="project-block-role">Research Assistant</p>
+          <h3>Redesigning a Robot End-Effector That Was Faking Its Own Defects</h3>
+          <p class="project-block-role">Boeing Advanced Research Center (BARC) · Mechanical Design Research Assistant · May 2023 – Jun 2024</p>
         </div>
       </div>
+      <div class="stack-bar">
+        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span>Deployment</span>
+      </div>
       <div class="project-block-visuals img-2">
-        <img src="assets/img/curved_cad.png" alt="Curved probe CAD" />
+        <img src="assets/img/curved_cad.png" alt="Two-curve probe end-effector CAD" />
         <video src="assets/img/curved_probe.MOV" muted playsinline loop autoplay></video>
       </div>
+      <p class="project-block-summary">
+        Boeing inspects composite parts by running an ultrasonic probe over them on
+        a robot arm. On curved parts, the scans kept showing defects that weren't
+        physically there — which is expensive, because you can't ship a part you
+        don't trust. I ran the signal analysis that showed the artifacts came from
+        the probe's own geometry and water coupling, not the part, then redesigned
+        the end-effector to remove the cause.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Scan artifacts in Boeing composite inspection workflows.</li>
-        <li><strong>Result:</strong> Identified two root causes via FFT-based analysis; novel two-curve probe geometry and fixture redesign (40% better water retention)—improved defect detection and SNR.</li>
-        <li><strong>How:</strong> FFT-based signal analysis; curved probe for laser line scanner and water column; Boustrophedon path planning (IN/OUT events, DFS).</li>
+        <li><strong>My role:</strong> Diagnosis through delivered hardware — I found the root causes, designed the replacement probe, coordinated fabrication, inspected first articles, and validated it by scan testing.</li>
+        <li><strong>How it works:</strong> FFT analysis of the scan signal isolated two artifact sources; a novel two-curve probe geometry (SolidWorks, GD&amp;T, FEA, CNC-machinable) eliminated the geometric one; a redesigned fixture fixed the coupling one. I also implemented Boustrophedon cell decomposition for robot scan coverage.</li>
+        <li><strong>Outcome:</strong> Geometry-induced artifacts eliminated; 40% better water retention, improving defect-detection reliability and SNR.</li>
       </ul>
-      <p class="project-block-caption">Curved probe: laser line scanner, water column, robot path planning. Path planning: Boustrophedon decomposition, IN/OUT events, DFS.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>SolidWorks</span><span>Path Planning</span><span>FFT</span></span>
-        <a href="projects/boeing-arc.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>End-Effector Design</span><span>FFT</span><span>Path Planning</span><span>SolidWorks</span><span>FEA</span></span>
+        <a href="projects/boeing-arc.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
 
-    <!-- 6. Design Build Fly -->
-    <article class="project-block" id="dbf">
+    <!-- 5. Powerlight -->
+    <article class="project-block" id="powerlight">
       <div class="project-block-header">
         <div>
-          <h3>Design Build Fly (DBF)</h3>
-          <p class="project-block-role">Landing Gear Lead</p>
+          <h3>Building an Automated Test Machine From Scratch, Alone</h3>
+          <p class="project-block-role">Powerlight Technologies · Automation Engineering Intern · Jun – Sep 2025</p>
         </div>
+      </div>
+      <div class="stack-bar">
+        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span class="on">Deployment</span>
+      </div>
+      <div class="project-block-visuals img-1">
+        <img src="assets/img/powerlight_setup.jpg" alt="Automated PV cell test station" />
+      </div>
+      <p class="project-block-summary">
+        Testing photovoltaic cells was entirely manual, so throughput was capped by
+        how long a person could stand at the bench — and the data drifted depending
+        on who ran it. I built the machine that replaced that process: the
+        mechanical fixturing, the sensor and actuator integration, and the control
+        software, from an empty bench to a system that runs unattended overnight.
+      </p>
+      <ul class="project-block-bullets">
+        <li><strong>My role:</strong> Sole engineer, scoping through commissioning — hardware selection, design, build, software, and documentation.</li>
+        <li><strong>How it works:</strong> SolidWorks fixtures and assembly tooling holding sub-0.1 mm optical alignment; integrated high-speed cameras, an InGaAs spectrometer, DAQ, and actuators; Python control software with a PyQt operator GUI; full BOM and V&amp;V documentation.</li>
+        <li><strong>Outcome:</strong> Every manual step eliminated, enabling continuous unattended operation; folded into the existing PLM/BOM workflow so it outlived my internship.</li>
+      </ul>
+      <div class="project-block-footer">
+        <span class="project-block-tags"><span>Automation</span><span>DAQ</span><span>PyQt</span><span>SolidWorks</span><span>V&amp;V</span></span>
+        <a href="projects/powerlight.html" class="project-block-link">Technical details →</a>
+      </div>
+    </article>
+
+    <!-- 6. Sun Lab / MARA -->
+    <article class="project-block" id="sun-lab">
+      <div class="project-block-header">
+        <div>
+          <h3>Closing the Loop on a Self-Driving Materials Lab</h3>
+          <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant</p>
+        </div>
+      </div>
+      <div class="stack-bar">
+        <span>Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
       <div class="project-block-visuals">
-        <img src="assets/img/dbf_plane.png" alt="DBF plane" />
-        <img src="assets/img/landing_gear_adapter.png" alt="Landing gear adapter" />
-        <img src="assets/img/dbf_fuselage_landing_gear.png" alt="Fuselage and landing gear" />
+        <img src="assets/img/mara_architecture.png" alt="MARA system architecture" />
+        <video src="assets/img/mara_demo.MOV" muted playsinline loop autoplay></video>
+        <img src="assets/img/mara_workflow.png" alt="MARA experiment workflow" />
       </div>
+      <p class="project-block-summary">
+        A self-driving lab is supposed to run experiments without a human: pick the
+        next formulation, mix it, deposit it, measure the result, repeat. This one
+        could do everything except the measuring — a person still had to eyeball
+        sample concentrations, which meant the "autonomous" loop stopped every
+        cycle and waited. I closed it with a camera.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Led landing gear design for the team’s RC plane.</li>
-        <li><strong>Result:</strong> Fully-removable one-piece gear meeting constraints and FOM; fuselage/spar integration and canopy pin locks (pins non–load bearing).</li>
-        <li><strong>How:</strong> Evaluated and rejected retracts and sliding pins; CAD and FEA; gear housed in fuselage under wing spar with mount and pin locks.</li>
+        <li><strong>My role:</strong> Built and deployed the perception half of the autonomy loop, and worked with the chemists to get it trusted enough to actually be used.</li>
+        <li><strong>How it works:</strong> Real-time computer vision extracting concentration from sample color, feeding the deposition controller directly; Latin Hypercube Sampling over a 96-sample Opentrons plate for experiment design; handling for cross-contamination, lighting noise, and stock depletion.</li>
+        <li><strong>Outcome:</strong> Replaced manual spot-checks with continuous automated feedback and was adopted into active deposition workflows.</li>
       </ul>
-      <p class="project-block-caption">Fully-removable one-piece gear; fuselage/wing spar; canopy pin locks (pins non–load bearing). Options rejected: retracts, sliding pins.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>CAD</span><span>FEA</span><span>Carbon</span></span>
-        <a href="projects/design-build-fly.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>Computer Vision</span><span>Closed-Loop Autonomy</span><span>Opentrons</span><span>Python</span></span>
+        <a href="projects/sun-lab.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
 
-    <!-- 7. Anti-Sway Control -->
-    <article class="project-block" id="anti-sway">
+    <!-- 7. Washington Hyperloop -->
+    <article class="project-block" id="hyperloop">
       <div class="project-block-header">
         <div>
-          <h3>Anti-Sway Control</h3>
-          <p class="project-block-role">Mechatronics Project</p>
+          <h3>A Tunnel Boring Machine, 45 Engineers, and a Fixed Deadline</h3>
+          <p class="project-block-role">Washington Hyperloop · Executive Director &amp; Electromechanical Systems Engineer · Jan 2024 – Apr 2025</p>
         </div>
       </div>
-      <div class="project-block-visuals img-2">
-        <video src="assets/img/ide_vs_anti_sway.MOV" muted playsinline loop autoplay></video>
-        <video src="assets/img/tracking_mode.mp4" muted playsinline loop autoplay></video>
+      <div class="stack-bar">
+        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span class="on">Deployment</span>
       </div>
+      <div class="project-block-visuals">
+        <img src="assets/img/final_tbm.png" alt="Completed tunnel boring machine" />
+        <img src="assets/img/tbm_site.png" alt="Competition tunneling site" />
+        <img src="assets/img/tbm_site2.png" alt="Tunneling site operations" />
+      </div>
+      <p class="project-block-summary">
+        A student team had to design and build a working tunnel boring machine from
+        nothing and run it at The Boring Company's national competition on a date
+        that would not move. I ran the organization and built its control system —
+        which meant I was both the person setting the ME/EE/firmware schedule and
+        the person up at night making the motors and pumps actually talk to the
+        server.
+      </p>
       <ul class="project-block-bullets">
-        <li><strong>What:</strong> Mechatronics project implementing anti-sway control for a crane/load system.</li>
-        <li><strong>Result:</strong> Comparison of tracking vs idle vs anti-sway mode; validated via torsion test, beam bending, and motor speed characterization.</li>
-        <li><strong>How:</strong> System block diagram (sensors, controller, actuators); manufacturing; BOM and Gantt for project management.</li>
+        <li><strong>My role:</strong> Executive Director over 5 subteams and 45+ engineers on a $20K budget, and hands-on owner of the electromechanical control system.</li>
+        <li><strong>How it works:</strong> ESP32 firmware (Embedded C) driving motor drivers and pump controllers over UART/I2C, reporting to a Python data server for live telemetry; emergency-stop and manual-start paths designed for low-latency, fail-safe response.</li>
+        <li><strong>Outcome:</strong> Zero control-system failures at competition, passed every mechanical, electrical, and software inspection, won the Cutterhead Mini-Competition, and came in under budget.</li>
       </ul>
-      <p class="project-block-caption">Tracking vs anti-sway mode. Block diagram, manufacturing, torsion test, beam bending, motor speed. BOM & Gantt.</p>
       <div class="project-block-footer">
-        <span class="project-block-tags"><span>Control Systems</span><span>Mechatronics</span></span>
-        <a href="projects/anti-sway.html" class="project-block-link">Details →</a>
+        <span class="project-block-tags"><span>ESP32</span><span>Embedded C</span><span>Controls</span><span>Systems Integration</span><span>Leadership</span></span>
+        <a href="projects/washington-hyperloop.html" class="project-block-link">Technical details →</a>
       </div>
     </article>
+
+    <!-- Publications -->
+    <section class="minor-section" id="publications">
+      <h2>Publications</h2>
+      <ul class="pub-list">
+        <li>
+          R. Shang*, P. Lorraine, S. Smith, H. Chan, <strong>V. Tevy*</strong>, I. Pelivanov, M. O'Donnell.
+          "Real-time spectroscopic PAUS imaging integrated on a commercial scanner."
+          <em>SPIE Photonics West</em>, Jan 2025. <span class="meta">(* equal contribution)</span>
+        </li>
+        <li>
+          <strong>Bimanual robotic composite layup with learned manipulation policies and profilometric quality evaluation.</strong>
+          <span class="meta">In preparation.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Graduate coursework projects -->
+    <section class="minor-section" id="coursework">
+      <h2>Graduate coursework projects</h2>
+      <p>Course projects from my M.S. — smaller in scope than the work above.</p>
+      <ul class="minor-list">
+        <li>
+          <strong>SHIELD — safe real-time robot controller.</strong>
+          Integrated Hamilton–Jacobi–Isaacs reachability into MPPI as a hard safety
+          constraint: value function solved offline, enforced online. &gt;50% collision
+          risk reduction at 20 Hz on CPU for 4 ms of overhead.
+          <span class="meta">Mar – Jun 2025</span>
+        </li>
+        <li>
+          <strong>CIDER — conditional diffusion for trajectory generation.</strong>
+          Co-developed a 1D U-Net diffusion model (PyTorch, CUDA) trained on 12,000+
+          simulated trajectories; MAE of 0.0069 A validated against real battery data.
+          <span class="meta">Mar – Jun 2025</span>
+        </li>
+        <li>
+          <strong>3–6 DoF robotic arm — CAD through motion planning.</strong>
+          Designed the arm in SolidWorks, exported to URDF, implemented FK/IK and
+          motion planning in ROS, and validated in MuJoCo.
+          <span class="meta">Mar – Jun 2024</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Earlier work -->
+    <section class="minor-section" id="earlier-work">
+      <h2>Earlier work</h2>
+      <p>Undergraduate mechanical design and mechatronics projects, kept for reference.</p>
+      <ul class="minor-list">
+        <li>
+          <strong><a href="projects/design-build-fly.html">Design Build Fly — Landing Gear Lead.</a></strong>
+          Led landing gear design for the team's RC aircraft: concept trade study
+          against retracts and sliding pins, CAD and FEA, and fuselage/wing-spar
+          integration for a fully-removable one-piece gear.
+        </li>
+        <li>
+          <strong><a href="projects/anti-sway.html">Anti-sway control for a crane system.</a></strong>
+          Undergraduate mechatronics project: sensor/controller/actuator integration,
+          fabrication, and validation comparing tracking, idle, and anti-sway modes.
+        </li>
+      </ul>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p class="contact-inline">
+      <a href="mailto:vtevy@uw.edu">vtevy@uw.edu</a>
+      <a href="https://www.linkedin.com/in/vattanary-tevy" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/VattanaryT" target="_blank" rel="noopener">GitHub</a>
+      <a href="resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </p>
+    <p>Vattanary Tevy · Seattle, Washington</p>
+  </footer>
 
   <script src="assets/js/main.js"></script>
 </body>
