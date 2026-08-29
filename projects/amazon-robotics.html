@@ -3,54 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amazon Robotics — Vattanary Tevy</title>
+  <title>Production Robotic Vision — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Amazon Robotics</h1>
-      <p class="role">Robotics Data Scientist Intern · Seattle, WA · Sep–Dec 2025</p>
-    </div>
-
-    <div class="gallery gallery-single">
-      <img src="../assets/img/amazon_robotics.png" alt="Amazon Robotics — robotics vision and data" />
+      <h1>Debugging a Robotic Vision System in Production</h1>
+      <p class="role">Amazon Robotics · Robotics Data Scientist Intern · Sep – Dec 2025</p>
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Internship focused on production robotic vision systems at scale: diagnosing failures with statistical rigor, turning fuzzy quality questions into measurable metrics, and reporting to cross-functional partners.</p>
+      <div class="callout">
+        This work is confidential. What follows is a high-level description of the
+        problem shape and my approach — no system details, data, or results.
+      </div>
     </section>
 
     <section class="detail-section">
-      <h2>Production diagnosis</h2>
+      <h2>The problem shape</h2>
+      <p>
+        A robotic vision system in production was failing intermittently, and had
+        been for about a month without an identified cause. Failures like this are
+        genuinely hard for a structural reason: they are too rare to reproduce on
+        demand, so you cannot attach a debugger and wait for one, but too frequent
+        to write off as noise. Direct debugging had already been attempted and had
+        not converged.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>My approach</h2>
+      <p>
+        My contribution was to reframe it. The system had already recorded the
+        evidence — every cycle it ran was logged with its conditions and its
+        outcome. That makes it a hypothesis-testing problem rather than a
+        debugging problem, and it changes the question from "what went wrong in
+        this trace" to "which conditions are the failures <em>not</em> independent
+        of."
+      </p>
+      <p>
+        I applied statistical independence testing across the logged population to
+        find conditions whose association with failure was too strong to be
+        chance. The useful inversion is that at production scale, the same rarity
+        that makes a failure impossible to catch by hand is what makes it visible
+        statistically — you stop trying to catch one instance and start measuring
+        the population.
+      </p>
+      <p>
+        I also worked on consistency metrics between perception models. The
+        principle is that models observing the same physical scene through
+        different representations are mutually constrained by geometry, so their
+        disagreement is measurable without ground-truth labels. When they disagree
+        beyond what their independent error rates explain, at least one is wrong —
+        and you learn that continuously, in production, without anyone annotating
+        anything. I built the supporting data pipelines in Python over AWS S3 and
+        SQL.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Outcome</h2>
       <ul>
-        <li>Diagnosed a month-long unresolved production failure in a high-volume robotic vision system.</li>
-        <li>Applied chi-square and independence tests across millions of cycles; confirmed root cause in under two weeks (&gt;50% faster than the prior trajectory), directly unblocking the engineering fix.</li>
+        <li>Root cause isolated in under two weeks, substantially faster than the preceding effort, which unblocked the engineering fix.</li>
+        <li>The consistency work fed into ongoing production monitoring, so this class of failure is caught rather than rediscovered.</li>
       </ul>
     </section>
 
     <section class="detail-section">
-      <h2>Metrics &amp; monitoring</h2>
-      <ul>
-        <li>Designed cross-model consistency metrics for segmentation, depth, and object dimension pipelines.</li>
-        <li>Converted ambiguous stakeholder quality concerns into a measurable production monitoring framework used for threshold tuning and alerting.</li>
-      </ul>
+      <h2>Why this matters for deployed robots</h2>
+      <p>
+        A learned policy that works in the lab and degrades quietly in the field is
+        the default failure mode of robot deployment, and it is rarely a dramatic
+        crash — it is a slow drift in a perception input that nothing was watching.
+        The transferable lesson is that monitoring has to be designed alongside the
+        system, and that models observing the same physical world can be made to
+        check each other for free.
+      </p>
     </section>
 
-    <section class="detail-section">
-      <h2>Communication &amp; impact</h2>
-      <ul>
-        <li>Communicated test plans, findings, and coverage metrics to cross-functional audiences spanning data scientists, robotics engineers, and product leads.</li>
-        <li>Translated technical results into actionable recommendations for engineering and product decisions.</li>
-      </ul>
-    </section>
-
-    <a href="../index.html#amazon-robotics" class="back-link">← Maker portfolio</a>
+    <a href="../index.html#amazon-robotics" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

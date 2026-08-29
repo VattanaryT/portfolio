@@ -3,40 +3,294 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WEIRD Lab — Vattanary Tevy</title>
+  <title>Bimanual Robotic Composite Layup — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Washington Embodied Intelligence and Robotics Development Lab (WEIRD Lab)</h1>
-      <p class="role">Robotics & RL Research</p>
+      <h1>Teaching Two Robot Arms to Lay Up Carbon Fiber</h1>
+      <p class="role">WEIRD Lab, University of Washington · Robot Learning Researcher · Jan 2026 – present</p>
     </div>
 
     <div class="gallery">
-      <img src="../assets/img/geodude_teleop.png" alt="Teleop demonstration" />
+      <img src="../assets/img/geodude_teleop.jpg" alt="GELLO-style teleoperation setup for collecting layup demonstrations" />
       <video src="../assets/img/right_wrist.mp4" muted playsinline loop autoplay></video>
     </div>
 
+    <!--
+      TODO(video): drop an autonomous policy rollout here — this is the single
+      highest-value asset on the site. Save as assets/img/autonomous_rollout.mp4
+      and uncomment. A failing rollout is still worth showing.
+
+    <div class="gallery gallery-single">
+      <video src="../assets/img/autonomous_rollout.mp4" muted playsinline loop autoplay></video>
+    </div>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">
+      Diffusion Policy running autonomously on the right arm.
+    </p>
+    -->
+
+
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Research in embodied AI, robotics, and reinforcement learning—including teleoperation and imitation learning for dexterous manipulation.</p>
+      <h2>Why this task resists conventional automation</h2>
+      <p>
+        Composite layup — pressing a ply of carbon fiber prepreg into a mold so it
+        conforms without wrinkling — is still done by hand in most of aerospace.
+        The reason is that it is a <strong>contact-rich, compliant-material task
+        with no clean state representation</strong>. The ply deforms as you touch
+        it, so its shape at any moment is a function of the entire history of
+        contact applied to it. A technician succeeds by modulating force against
+        felt resistance, and cannot articulate the policy they are executing.
+      </p>
+      <p>
+        That combination defeats the two usual approaches. You cannot script a
+        trajectory, because the correct motion depends on how the material has
+        already deformed. And you cannot easily write a reward function, because
+        "did this wrinkle" is a property of the finished surface, not of any
+        instantaneous state. It is a good task for imitation learning, and a
+        good argument for why physical intelligence needs both hardware and
+        policy work in the same pair of hands.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
+      <h2>System architecture</h2>
+      <p>
+        Two UR5e arms, each with a distinct job. The split is the core design
+        decision of the system: it separates <em>doing the task</em> from
+        <em>measuring whether the task went well</em>, so that quality
+        measurement is a first-class, automated part of the loop rather than a
+        human stepping in between episodes.
+      </p>
+      <div class="table-scroll">
+        <table class="spec-table">
+          <tr>
+            <th>Right arm — execution</th>
+            <td>UR5e (6 DoF) mounted on a vertical translational rail, giving a
+            7th DoF when the task needs the extra reach or a better approach
+            angle. Runs the learned manipulation policy under impedance-style
+            control.</td>
+          </tr>
+          <tr>
+            <th>Left arm — evaluation</th>
+            <td>Carries a laser profilometer. Scans the laid-up surface to detect
+            and quantify wrinkle formation, producing an objective quality
+            measurement per episode.</td>
+          </tr>
+          <tr>
+            <th>Force sensing</th>
+            <td>UR5e flange-mounted force/torque sensor — contact force is
+            measured at the wrist, where the tool actually meets the ply.</td>
+          </tr>
+          <tr>
+            <th>Policy stack</th>
+            <td>ACT (action chunking) and Diffusion Policy (Chi et al.),
+            implemented through Hugging Face LeRobot.</td>
+          </tr>
+          <tr>
+            <th>Teleoperation</th>
+            <td>GELLO-style leader arm for task-space demonstration collection.</td>
+          </tr>
+          <tr>
+            <th>Runtime</th>
+            <td>ROS2 on Linux, coordinating both arms, the profilometer, and the
+            teleoperation rig.</td>
+          </tr>
+          <tr>
+            <th>Dataset</th>
+            <td>500+ teleoperated demonstrations spanning multiple tools, carbon
+            fiber strip sizes, and mold shapes.</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>End-effector design</h2>
+      <!--
+        TODO(images): add photos of (1) the hand-tool-derived end-effector and
+        (2) the custom roller tool. Suggested filenames:
+        assets/img/layup_tool.jpg, assets/img/roller_tool.jpg
+      -->
+      <p>
+        The primary end-effector is modeled on <strong>the hand tool a technician
+        actually uses to lay up composite</strong> — not on a generic gripper.
+        That choice is deliberate: the human tool geometry already encodes decades
+        of process knowledge about how to distribute pressure into a ply without
+        distorting it. Starting from a gripper would mean rediscovering that
+        through trial and error, and it would also break the correspondence
+        between what the demonstrator does and what the robot can do — which is
+        exactly the correspondence imitation learning depends on.
+      </p>
+      <p>
+        A custom roller tool is also in development, for the parts of the task
+        where a rolling contact distributes force better than a pressing one. Part
+        of what the 500+ demonstration set varies is which tool is in the hand, so
+        the policy sees the task rather than one specific implement.
+      </p>
+      <p>
+        I design and fabricate the end-effector subsystems, fixtures, and assembly
+        tooling for both arms in SolidWorks, validated through structured
+        closed-loop hardware test cycles against stiffness, weight, and
+        repeatability targets.
+      </p>
+      <div class="callout">
+        <strong>The thesis behind the project:</strong> in a contact-rich task,
+        mechanical design sets the ceiling on what any policy can learn.
+        End-effector compliance determines whether the controller has usable
+        dynamics. Stiffness determines whether a commanded pose is the actual
+        pose. Repeatability determines whether two demonstrations of the same
+        motion are one data point or two. Get these wrong and you get a training
+        problem that looks like a learning failure and is actually a hardware
+        failure — which is the case for owning both.
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Collecting demonstrations</h2>
+      <p>
+        Demonstrations are collected through a <strong>GELLO-style leader arm in
+        task space</strong>. I evaluated VR controller teleoperation and found it
+        unsuitable here: this task is defined by fine force modulation against a
+        surface, and the demonstration interface has to preserve that fidelity or
+        the data does not contain the thing the policy needs to learn.
+      </p>
+      <p>
+        The dataset is now <strong>500+ demonstrations</strong>, deliberately
+        varied across three axes — tool, carbon fiber strip size, and mold shape.
+        The variation is the point. A policy trained on one strip on one mold
+        learns that specific trajectory; varying the geometry forces it toward the
+        underlying strategy, and it is what makes the evaluation meaningful when a
+        new mold shows up.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Why Diffusion Policy wins on this task</h2>
+      <p>
+        I trained both ACT and Diffusion Policy on the same demonstration set.
+        <strong>Diffusion Policy clearly wins, and the reason is
+        multimodality.</strong>
+      </p>
+      <p>
+        There is rarely one correct way to lay a strip down. A human might work
+        from the center outward or from one edge across; both succeed, and both
+        appear in the data for the same observation. A policy that regresses to a
+        single action — as ACT tends to under this kind of conflict — averages the
+        two valid strategies together and produces a third one that is not valid
+        at all. Diffusion Policy models the action distribution instead of its
+        mean, so it can represent "either of these" and commit to one, rather than
+        splitting the difference.
+      </p>
+      <p>
+        This is precisely the regime where the multimodality argument for
+        diffusion policies stops being theoretical: with 500+ demonstrations
+        collected across varied tools and geometries by a human who does not
+        execute the task identically twice, conflicting-but-valid actions for
+        similar observations are the norm rather than an edge case.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Control: impedance, not position</h2>
+      <p>
+        Commanding position into a contact task means the arm will happily drive
+        through the ply and the mold to reach a setpoint. Impedance control
+        instead specifies the <em>relationship</em> between deviation and force —
+        the arm behaves like a programmable spring-damper — so contact is bounded
+        by construction and the policy can command "press toward the mold" without
+        knowing the exact mold geometry.
+      </p>
+      <p>
+        For the GELLO teleoperation path I run a custom impedance-like PD
+        controller, adapted from a colleague's implementation and reworked for
+        this task. This is not incidental plumbing: the task demands precise force
+        control and dexterous manipulation simultaneously, and the controller is
+        what determines whether the demonstrations contain usable force
+        information or just position traces with contact noise on top.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Current work: control on a curved surface</h2>
+      <p>
+        The system is moving from a Euclidean workspace to operating directly on
+        the <strong>curved (non-Euclidean) surface of the mold</strong>, and I am
+        implementing the impedance controller for that space.
+      </p>
+      <p>
+        The motivation: standard impedance control defines stiffness along fixed
+        world axes, but those axes are meaningless to this task. What matters is
+        the surface's own frame — moving <em>along</em> the mold versus pressing
+        <em>into</em> it. On a curved mold those directions change continuously
+        with position, so a controller in world coordinates has to keep
+        re-deriving them and gets the decomposition subtly wrong wherever the
+        curvature changes.
+      </p>
+      <p>
+        The new controller decomposes the command in the surface frame instead:
+        <strong>tangential motion as twist commands along the surface, separated
+        from force along the normal axis.</strong> That gives one channel for
+        "where to move on the ply" and an independent one for "how hard to press,"
+        regardless of the mold's shape — which both simplifies what the policy has
+        to output and makes the same policy transfer across mold geometries
+        rather than relearning each one.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Evaluation: what the profilometer measures</h2>
+      <p>
+        Evaluation runs as closed-loop rollouts on the real hardware, scored by
+        the profilometer arm rather than by held-out action prediction error —
+        action-space loss on a validation set does not tell you whether a ply
+        wrinkled.
+      </p>
+      <p>
+        The metric set is still being refined. The three quantities I am working
+        toward, because together they distinguish failure modes that a single
+        number would conflate:
+      </p>
       <ul>
-        <li>Translated open-ended research goals into measurable success criteria and benchmarking methodology for dexterous manipulation policies (e.g. carbon fiber layup tasks).</li>
-        <li>Own end-to-end data collection pipeline and experiment cycles—balancing quality, hardware constraints, and research pace to maintain continuous iteration toward policy performance targets.</li>
-        <li>Evaluation frameworks and iterative improvement cycles; teleoperation and imitation learning as part of the pipeline.</li>
+        <li><strong>Defect area —</strong> the total surface area affected by wrinkling. Captures how much of the ply went wrong.</li>
+        <li><strong>Peak height difference —</strong> local deviation at each wrinkle. Captures how severe a given defect is; a small area at high amplitude can be worse than a large shallow one.</li>
+        <li><strong>Wrinkle count by region —</strong> how many distinct defects, and where. Distinguishes one systematic problem from many scattered ones, which points at different causes — a policy error versus a tooling or material error.</li>
       </ul>
     </section>
 
-    <a href="../index.html#weird-lab" class="back-link">← Maker portfolio</a>
+    <section class="detail-section">
+      <h2>Toward reward from sensing</h2>
+      <p>
+        The direction this enables is DSRL infrastructure using profilometer
+        feedback as a learned reward signal. Wrinkle measurement is already an
+        automated, physical, objective quantity — which makes this one of the rare
+        contact-rich manipulation tasks where the reward does not have to be
+        hand-designed or human-labeled. That turns the evaluation arm from a
+        measurement device into a training signal, and lets the system improve
+        past the quality of the demonstrations it was given.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Status</h2>
+      <p>
+        Research in preparation for publication: <em>Bimanual robotic composite
+        layup with learned manipulation policies and profilometric quality
+        evaluation.</em> Quantitative policy performance results are pending.
+      </p>
+      <!-- TODO(links): add repo links for the diffused-fields and Diffusion Policy implementations. -->
+    </section>
+
+    <a href="../index.html#weird-lab" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>

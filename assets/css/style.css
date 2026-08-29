@@ -1,3 +1,6 @@
+/* @import must precede all rules — keep this first. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap");
+
 /* =========  Global theme — minimalist, recruiter-friendly  ========= */
 :root {
   --accent: #0d7377;
@@ -457,7 +460,7 @@ main {
 .project-block-visuals {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: 0.75rem;
   margin-bottom: 1rem;
 }
 
@@ -469,16 +472,7 @@ main {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Images: natural aspect ratio — no letterboxing from a fixed box */
-.project-block-visuals img {
-  width: 100%;
-  height: auto;
-  display: block;
-  padding: 0;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-}
-
+.project-block-visuals img,
 .project-block-visuals video {
   width: 100%;
   aspect-ratio: 4/3;
@@ -487,39 +481,18 @@ main {
   border-radius: 6px;
   border: 1px solid var(--border);
   display: block;
-  padding: 0;
 }
 
-/* Single-image blocks: full column width */
+/* Single-image blocks: smaller so one image isn’t oversized */
 .project-block-visuals.img-1 img,
 .project-block-visuals.img-1 video {
-  max-width: 100%;
+  max-width: 58%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .project-block-visuals video {
   background: var(--border);
-}
-
-/* Same cell size across Sun Lab, uWAMIT, Washington Tunneling, BARC */
-.project-block-visuals.visuals-uniform {
-  gap: 0.5rem;
-  align-items: stretch;
-}
-
-.project-block-visuals.visuals-uniform img,
-.project-block-visuals.visuals-uniform video {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  object-position: center;
-  height: auto;
-}
-
-/* Powerlight: single image narrower than Amazon / full-width img-1 */
-.project-block-visuals.img-1.img-1-sm img {
-  max-width: 50%;
 }
 
 .project-block-bullets {
@@ -597,19 +570,18 @@ main {
 
 .project-page .gallery {
   display: grid;
-  gap: 0;
+  /* Without explicit columns this collapses to a single full-width stack,
+     which letterboxes every image and buries the text below the fold. */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.project-page .gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
-  padding: 0;
-  border-radius: 8px;
-  border: 1px solid var(--border);
+.project-page .gallery.gallery-single {
+  grid-template-columns: 1fr;
 }
 
+.project-page .gallery img,
 .project-page .gallery video {
   width: 100%;
   aspect-ratio: 4/3;
@@ -618,17 +590,16 @@ main {
   border-radius: 8px;
   border: 1px solid var(--border);
   display: block;
-  padding: 0;
 }
 
 .project-page .gallery video {
   background: var(--border);
 }
 
-/* Single-image gallery: nearly full content width */
+/* Single-image gallery: slightly smaller */
 .project-page .gallery.gallery-single img,
 .project-page .gallery.gallery-single video {
-  max-width: 100%;
+  max-width: 65%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -651,6 +622,26 @@ main {
 .project-page .detail-section ul {
   color: var(--text-muted);
   font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.project-page .detail-section ul {
+  padding-left: 1.25rem;
+}
+
+.project-page .detail-section li {
+  margin-bottom: 0.5rem;
+}
+
+.project-page .detail-section li:last-child,
+.project-page .detail-section > *:last-child {
+  margin-bottom: 0;
+}
+
+.project-page .detail-section .callout,
+.project-page .detail-section .table-scroll {
+  margin-bottom: 1rem;
 }
 
 .project-page .back-link {
@@ -712,8 +703,233 @@ main {
   margin-bottom: 0;
 }
 
+/* ===== Positioning statement (hero lead)  ===== */
+.positioning {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.positioning strong {
+  font-weight: 600;
+}
+
+/* ===== Two-column info row (education / honors)  ===== */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.info-grid .about-section {
+  margin-bottom: 0;
+}
+
+.info-grid p {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* ===== Capability groups — the loop, stage by stage  ===== */
+.skill-groups {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.skill-group {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.5rem 0.9rem;
+  align-items: baseline;
+  font-size: 0.85rem;
+}
+
+.skill-group dt {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skill-group dd {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ===== Stack coverage chips — which parts of the loop a project spans ===== */
+.stack-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.9rem;
+}
+
+.stack-bar span {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: #b0b0b0;
+}
+
+.stack-bar span.on {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ===== Plain-language project summary (homepage snapshot)  ===== */
+.project-block-summary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* ===== Compact secondary lists (coursework, earlier work)  ===== */
+.minor-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.minor-section > p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.minor-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.minor-list li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.minor-list li strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.minor-list .meta {
+  font-size: 0.8rem;
+  color: #8a8a8a;
+}
+
+/* ===== Publications  ===== */
+.pub-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pub-list li {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+}
+
+.pub-list li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ===== Project detail page: spec table + takeaway  ===== */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.spec-table th,
+.spec-table td {
+  text-align: left;
+  padding: 0.45rem 0.75rem 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.spec-table th {
+  font-weight: 600;
+  white-space: nowrap;
+  width: 12rem;
+}
+
+.spec-table td {
+  color: var(--text-muted);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.callout strong {
+  font-weight: 600;
+}
+
+/* ===== Footer  ===== */
+footer.site-footer {
+  max-width: var(--max-width);
+  margin: 4rem auto 0;
+  padding: 2rem 1.5rem 3rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+footer.site-footer .contact-inline {
+  margin-bottom: 0.5rem;
+}
+
 /* ===== Responsive  ===== */
 @media (max-width: 600px) {
+  .skill-group {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .skill-group dt {
+    font-size: 0.8rem;
+  }
+
+  .spec-table th {
+    width: auto;
+    white-space: normal;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .info-grid .about-section {
+    margin-bottom: 2rem;
+  }
+
   header {
     flex-direction: column;
     align-items: flex-start;
@@ -754,11 +970,4 @@ main {
   .project-block-visuals.img-2 {
     grid-template-columns: 1fr;
   }
-
-  .project-block-visuals.img-1.img-1-sm img {
-    max-width: 100%;
-  }
 }
-
-/* Optional: DM Sans from Google Fonts — add in HTML if desired */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap");

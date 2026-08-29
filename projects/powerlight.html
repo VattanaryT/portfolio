@@ -3,48 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Powerlight Technologies — Vattanary Tevy</title>
+  <title>Automated PV Test Machine — Vattanary Tevy</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body class="project-page">
   <header>
     <a href="../index.html" class="site-title">Vattanary Tevy</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
   </header>
 
   <main>
     <div class="project-hero">
-      <h1>Powerlight Technologies</h1>
-      <p class="role">PV testing & automation</p>
+      <h1>Building an Automated Test Machine From Scratch, Alone</h1>
+      <p class="role">Powerlight Technologies · Automation Engineering Intern · Jun – Sep 2025</p>
     </div>
 
     <div class="gallery gallery-single">
-      <img src="../assets/img/powerlight_setup.jpg" alt="PV test setup" />
+      <img src="../assets/img/powerlight_setup.jpg" alt="Automated PV cell test station" />
     </div>
 
     <section class="detail-section">
-      <h2>Overview</h2>
-      <p>Automation and data-acquisition for photovoltaic (PV) cell testing. High-speed cameras and InGaAs spectrometer for characterization; custom PyQt GUI for control and data logging.</p>
+      <h2>The problem</h2>
+      <p>
+        Powerlight transmits power optically — a laser to a photovoltaic receiver —
+        so the performance of individual PV cells is a core product parameter, and
+        characterizing them is a constant activity rather than a one-time
+        qualification.
+      </p>
+      <p>
+        That characterization was fully manual. Two things follow from that, and
+        the second is worse than the first. Throughput is capped by how long a
+        person is willing to stand at a bench placing cells and triggering
+        measurements. And the data drifts: alignment done by hand varies between
+        operators and across a long session, so measurements from different days
+        are not strictly comparable. You end up unable to tell a real change in
+        cell performance from a change in who ran the test.
+      </p>
     </section>
 
     <section class="detail-section">
-      <h2>Technical highlights</h2>
-      <ul>
-        <li>High-speed cameras and InGaAs spectrometer integration</li>
-        <li>Data-acquisition (DAQ) pipeline and real-time monitoring</li>
-        <li>PyQt-based GUI for operators and experiment control</li>
-      </ul>
+      <h2>Scope</h2>
+      <p>
+        I was the only engineer on it, from scoping through commissioning:
+        hardware selection, mechanical design, sensor and actuator integration,
+        control software, and the documentation needed for anyone else to use and
+        maintain it.
+      </p>
+      <div class="table-scroll">
+        <table class="spec-table">
+          <tr>
+            <th>Mechanical</th>
+            <td>SolidWorks fixtures and assembly tooling holding sub-0.1 mm optical alignment, repeatably, without operator judgment.</td>
+          </tr>
+          <tr>
+            <th>Sensing</th>
+            <td>High-speed cameras and an InGaAs spectrometer for characterization, integrated with DAQ.</td>
+          </tr>
+          <tr>
+            <th>Actuation</th>
+            <td>Motion and positioning to sequence cells through the station unattended.</td>
+          </tr>
+          <tr>
+            <th>Software</th>
+            <td>Python control layer coordinating motion, acquisition, and logging; PyQt GUI for operators.</td>
+          </tr>
+          <tr>
+            <th>Documentation</th>
+            <td>Full BOM and V&amp;V records; integrated into existing PLM/BOM workflows.</td>
+          </tr>
+        </table>
+      </div>
     </section>
 
     <section class="detail-section">
-      <h2>How</h2>
-      <ul>
-        <li>Identified the manual testing bottleneck; independently scoped, designed, and deployed the end-to-end automated PV cell test system—from hardware selection through software commissioning.</li>
-        <li>Eliminated manual steps and enabled continuous unattended runs; integrated the solution into existing PLM and BOM workflows to reduce operator error and accelerate product validation cycle time.</li>
-        <li>Ensured durable organizational impact beyond the immediate fix by aligning the automation with existing processes.</li>
-      </ul>
+      <h2>Why the fixture was the hard part</h2>
+      <p>
+        The sub-0.1 mm alignment requirement is set by the physics: the measurement
+        is optical, so a small positional error changes the incident geometry and
+        therefore the reading. In manual operation that error was being absorbed by
+        a human eyeballing each placement — which is exactly the source of drift.
+      </p>
+      <p>
+        Automating the measurement without solving the fixturing would have
+        produced a machine that generates bad data faster. So the design goal was
+        to move the alignment tolerance out of the operator's hands and into the
+        fixture geometry, where it is repeatable and can be verified once rather
+        than trusted every cycle.
+      </p>
     </section>
 
-    <a href="../index.html#powerlight" class="back-link">← Maker portfolio</a>
+    <section class="detail-section">
+      <h2>Outcome</h2>
+      <ul>
+        <li>Every manual step eliminated, enabling continuous unattended operation — the machine runs overnight.</li>
+        <li>Measurement consistency no longer depends on the operator, so results are comparable across sessions.</li>
+        <li>Integrated into the company's existing PLM and BOM workflows, so it stayed in use after the internship ended rather than becoming an orphaned intern project.</li>
+      </ul>
+      <div class="callout">
+        <strong>Why this is on a robotics portfolio:</strong> it is the same loop as
+        a robot cell, minus the arm — mechanical design, sensing, actuation, and
+        control software, owned by one person and commissioned into production use.
+        The habit it builds is designing the fixture and the software as one system
+        rather than two.
+      </div>
+    </section>
+
+    <a href="../index.html#powerlight" class="back-link">← Selected work</a>
   </main>
 
   <script src="../assets/js/main.js"></script>
