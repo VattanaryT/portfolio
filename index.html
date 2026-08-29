@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vattanary Tevy — Full-Stack Robotics Engineer</title>
-  <meta name="description" content="Robotics engineer working across the full loop — end-effector hardware, sensing, real-time control, and learned manipulation policies deployed on real robots." />
+  <title>Vattanary Tevy — Robotics &amp; Automation Engineer</title>
+  <meta name="description" content="Robotics and automation engineer building and deploying learned policies on real robotic hardware: rosbag capture, LeRobot dataset conversion, diffusion policy training in PyTorch, and closed-loop evaluation on UR5e arms under ROS2." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -25,18 +25,19 @@
       </div>
       <div class="hero-right">
         <p class="positioning">
-          I build robots that learn to do physical work — and I own the whole loop:
-          <strong>the end-effector I design in CAD, the sensors I mount on it, the
-          controller that runs it, and the policy that decides what it does next.</strong>
-          My background is mechanical, so I care about the part most learning
-          people skip: whether the hardware is actually good enough for a policy
-          to succeed on.
+          I build robots that learn to do physical work, and own the loop from hardware to intelligence: 
+          <strong>designing end-effectors, integrating sensors into the mechanical stack, writing real-time controllers, 
+            and training the policies that decide what the robot does next.</strong>
+          </p> 
+        <p class="positioning">
+          My background is mechanical; I care about the layer most learning researchers never touch: 
+          the electromechanical integration that determines whether a policy sees clean signals, feels the world accurately, and has any chance of generalizing beyond the training set.
         </p>
         <p class="positioning" style="font-size: 0.95rem; color: var(--text-muted);">
-          Currently at UW's WEIRD Lab, where I lead a bimanual carbon-fiber layup
-          system on two UR5e arms — I designed the end-effectors, collect the
-          teleoperation data, train the manipulation policies, and run them on the
-          real robot. Amazon Robotics Research Fellow.
+          Currently at UW's WEIRD Lab, I lead a bimanual carbon-fiber layup cell on
+          two UR5e arms and own the pipeline end to end: rosbag capture, LeRobot
+          dataset conversion, diffusion policy training in PyTorch, and closed-loop
+          evaluation on the real hardware under ROS2.
         </p>
 
         <p class="contact-inline">
@@ -52,24 +53,28 @@
       <h2>Across the loop</h2>
       <div class="skill-groups">
         <dl class="skill-group">
-          <dt>Hardware</dt>
-          <dd>SolidWorks (CSWA), GD&amp;T (ASME Y14.5), sub-mm tolerance stack-up, FEA, end-effector &amp; fixture design, FDM/SLA, CNC-machinable geometry</dd>
-        </dl>
-        <dl class="skill-group">
-          <dt>Sensing</dt>
-          <dd>Laser profilometry, force/contact sensing, multimodal sensor fusion, DAQ integration, ESP32 / Embedded C, UART · I2C · SPI</dd>
-        </dl>
-        <dl class="skill-group">
-          <dt>Control</dt>
-          <dd>Real-time impedance control, MPPI / MPC, HJI reachability, ROS2, kinematics &amp; FK/IK</dd>
-        </dl>
-        <dl class="skill-group">
           <dt>Robot learning</dt>
-          <dd>ACT, Diffusion Policy, imitation learning, DSRL &amp; reward design, PyTorch (CUDA), LeRobot</dd>
+          <dd>PyTorch (CUDA), diffusion policy, imitation learning (ACT, behavior cloning), DAgger, Hugging Face LeRobot, transformer &amp; 1D U-Net backbones, W&amp;B sweeps, dataset curation, policy evaluation, sim-to-real</dd>
         </dl>
         <dl class="skill-group">
-          <dt>Deployment</dt>
-          <dd>Sim-to-real transfer, MuJoCo, teleop data pipelines, closed-loop hardware evaluation &amp; benchmarking</dd>
+          <dt>Robotics &amp; control</dt>
+          <dd>ROS2 Humble, UR5e / bimanual UR cells, MuJoCo, URDF, FK/IK, operational-space &amp; impedance control, force/torque control (RTDE), MPPI / MPC, HJI reachability, laser profilometry &amp; scan registration</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Software &amp; infrastructure</dt>
+          <dd>Python (NumPy, SciPy, Pandas, PyArrow), pytest (hardware/CI markers), C++, SQL, AWS S3, Git, Linux, MATLAB/Simulink, cloud ML training pipelines</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Mechanical design</dt>
+          <dd>SolidWorks (CSWA), GD&amp;T (ASME Y14.5), sub-mm tolerance stack-up, manufacturing &amp; tooling drawings, FEA, end-effector &amp; test fixture design, prototype fabrication (FDM/SLA, CNC)</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Electromechanical integration</dt>
+          <dd>Sensors, motor drivers, DAQ hardware, embedded systems (ESP32, Embedded C), UART · I2C · SPI, Aerotech Automation1, real-time control</dd>
+        </dl>
+        <dl class="skill-group">
+          <dt>Test &amp; verification</dt>
+          <dd>Automated test system design, structured V&amp;V cycles, statistical hypothesis testing (chi-square), FFT signal processing, first article inspection, BOM &amp; PLM documentation</dd>
         </dl>
       </div>
     </section>
@@ -77,54 +82,56 @@
     <div class="info-grid">
       <section class="about-section">
         <h2>Education</h2>
-        <p><strong>M.S. Mechanical Engineering</strong><br />Data Science &amp; Mechatronics · University of Washington · expected Jun 2026</p>
+        <p><strong>M.S. Mechanical Engineering</strong><br />Data Science &amp; Mechatronics · University of Washington · Jun 2026</p>
         <p><strong>B.S. Mechanical Engineering</strong><br />Mechatronics &amp; Applied Mathematics · University of Washington · Jun 2024</p>
       </section>
 
       <section class="about-section">
         <h2>Honors</h2>
-        <p>Amazon Robotics Research Fellowship<br />University of Washington, 2024–2025</p>
-        <p>The Social Justice Award (Ethics)<br />University of Washington, 2024</p>
+        <p>Amazon Robotics Research Fellowship<br />University of Washington, 2024–2025 · awarded for research at the UW Sun Lab, developing ML models for real-time robotic behavior monitoring and success/failure prediction</p>
+        <p>The Social Justice Award (Ethics)<br />University of Washington, 2024 · Green River College, 2022</p>
       </section>
     </div>
 
     <h2 class="page-title" id="work">Selected work</h2>
-    <p class="page-subtitle">
+    <!-- <p class="page-subtitle">
       Each project is tagged by the parts of the robotics stack it covers, from
       mechanical design through policy deployment. Click through for the
       technical implementation.
-    </p>
+    </p> -->
 
     <!-- 1. WEIRD Lab — flagship -->
     <article class="project-block" id="weird-lab">
       <div class="project-block-header">
         <div>
-          <h3>Teaching Two Robot Arms to Lay Up Carbon Fiber</h3>
-          <p class="project-block-role">WEIRD Lab, University of Washington · Robotics Researcher &amp; Amazon Robotics Research Fellow · Jan 2026 – present</p>
+          <h3>Robot Learning with Bimanual Arms for Carbon Fiber Layup Automation</h3>
+          <p class="project-block-role">WEIRD Lab, University of Washington · Robot Learning Researcher · Jan 2026 – present</p>
         </div>
       </div>
       <div class="stack-bar">
         <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
       <div class="project-block-visuals img-2">
-        <img src="assets/img/geodude_teleop.png" alt="Teleoperation setup for collecting layup demonstrations" />
-        <video src="assets/img/right_wrist.mp4" muted playsinline loop autoplay></video>
+        <!-- <img src="assets/img/geodude_teleop.png" alt="Teleoperation setup for collecting layup demonstrations" /> -->
+        <video src="assets/img/stringer_layup.webm" muted playsinline loop autoplay></video>
+        <video src="assets/img/geodude_gello_tool.mp4" muted playsinline loop autoplay></video>
       </div>
       <p class="project-block-summary">
-        Laying carbon fiber into a mold is done by hand because success depends on
-        contact forces a skilled technician feels but can't write down — press too
-        hard and the ply distorts, too soft and it wrinkles. I'm building a
-        two-armed robot that learns the motion from human demonstrations instead of
-        from a spec: the right arm performs the layup, and the left arm carries a
-        laser profilometer that scans the surface afterward and measures how badly
-        it wrinkled. That measurement is both the grade for the policy and,
+        Carbon fiber layup is still done by hand because success depends on
+        precise contact forces of a skilled technician. Changes in pressure could lead to 
+        distortion and wrinkles. My team is using a bimanual robot that learns the motion from human demonstrations:
+        the right arm performs the layup, and the left arm carries a
+        laser profilometer that scans the surface afterward and measures the surface quality. 
+        That measurement is both the grade for the policy and,
         increasingly, the reward signal it trains against.
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> I lead the system end to end — I design and fabricate the end-effectors and tooling for both arms, collect the demonstrations, write the controller, train the policies, and evaluate them on the real hardware.</li>
-        <li><strong>How it works:</strong> A UR5e on a vertical rail (7 DoF) carries an end-effector modeled on the hand tool a technician actually uses. I collected 500+ GELLO teleoperated demonstrations across varied tools, strip sizes, and mold shapes, and run them through ACT and Diffusion Policy (LeRobot, ROS2) under a custom impedance-style PD controller.</li>
-        <li><strong>What I found:</strong> Diffusion Policy clearly beats ACT here, because there is more than one valid way to lay a strip down and a policy that regresses to the mean of two good strategies produces a third one that fails.</li>
-        <li><strong>Current work:</strong> Rewriting the impedance controller to operate on the mold's curved surface rather than in world coordinates — separating tangential twist commands from normal-axis force, so the same policy transfers across mold geometries.</li>
+        <li><strong>My role:</strong> I lead the system end to end, overseeing end-effector and tooling design for both arms, collecting the demonstrations on a GELLO-style teleoperation setup, writing the controller, training the policies, and evaluating them on the real hardware.</li>
+        <li><strong>The pipeline:</strong> A config-driven three-stage pipeline (rosbag &rarr; trajectory pkl &rarr; LeRobot dataset &rarr; training) with sharded conversion and checkpoint resume, so one command reproduces any dataset or training run. I own the pytest infrastructure for both stacks (37 modules, 165 tests) with hardware/CI markers, so control-law and kinematics logic is verified without a robot in the loop.</li>
+        <li><strong>How it works:</strong> A UR5e on a vertical rail (7 DoF) carries an end-effector modeled on the hand tool a technician actually uses. I collected 500+ GELLO teleoperated demonstrations across varied tools, strip sizes, and mold shapes, and train ACT and Diffusion Policy in PyTorch/CUDA, ablating 1D U-Net against transformer backbones across prediction and action horizons via Weights &amp; Biases sweeps.</li>
+        <li><strong>On hardware:</strong> Trained policies run closed-loop at 10 Hz under ROS2 Humble, with rollouts evaluated against a laser-profilometer scan of the workpiece captured by the second arm. I fused 6-DoF end-effector pose with wrist force/torque in the observation space and built an in-contact force loop on the real UR5e F/T over RTDE, plus DAgger-style human-in-the-loop intervention for targeted on-policy data collection against observed failure modes.</li>
+        <li><strong>What I found:</strong> Diffusion Policy clearly beats ACT here, because there is more than one valid way to lay a strip down.</li>
+        <li><strong>Current work:</strong> Rewriting the impedance controller to operate on the mold's curved surface rather than in world coordinates; separating tangential twist commands from normal-axis force, so the same policy transfers across mold geometries.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>ACT</span><span>Diffusion Policy</span><span>Impedance Control</span><span>UR5e</span><span>ROS2</span></span>
@@ -144,7 +151,8 @@
         <span>Hardware</span><span class="on">Sensing</span><span>Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
       <p class="project-block-summary">
-        A robotic vision system in production was failing intermittently, and had
+        A robotic vision system in production needs to be further optimized. There were some
+        parts that were failing intermittently, and had
         been for about a month with no identified cause — too rare to reproduce on
         demand, too frequent to ignore, and direct debugging had already stalled.
         Rather than keep chasing individual traces, I treated the production logs
@@ -153,8 +161,8 @@
       </p>
       <ul class="project-block-bullets">
         <li><strong>My role:</strong> Owned the investigation, then contributed to the monitoring meant to catch the next one.</li>
-        <li><strong>How it works:</strong> Statistical independence testing over production-scale logs, plus consistency metrics between perception models — models observing the same scene are geometrically constrained, so their disagreement is a signal you get without labels.</li>
-        <li><strong>Outcome:</strong> Root cause isolated in under two weeks, unblocking the engineering fix.</li>
+        <li><strong>How it works:</strong> Chi-square and independence tests across millions of production cycles, plus cross-model consistency metrics for the segmentation, depth, and dimension pipelines. Models observing the same scene are geometrically constrained, so their disagreement is a signal you get without labels.</li>
+        <li><strong>Outcome:</strong> Root cause confirmed in under two weeks, unblocking the engineering fix; the scalable Python pipelines over AWS S3 and SQL stayed behind for production monitoring and alerting.</li>
         <li><strong>Note:</strong> Confidential work — described at a deliberately high level.</li>
       </ul>
       <div class="project-block-footer">
@@ -163,78 +171,7 @@
       </div>
     </article>
 
-    <!-- 3. uWAMIT / PAUS -->
-    <article class="project-block" id="uwamit">
-      <div class="project-block-header">
-        <div>
-          <h3>A Clinical Imaging Payload Where Timing Is Measured in Microseconds</h3>
-          <p class="project-block-role">uWAMIT — UW Molecular Imaging &amp; Therapy Center, with GE HealthCare · Mechanical Design &amp; Mechatronics Researcher · Jun 2024 – Mar 2025</p>
-        </div>
-      </div>
-      <div class="stack-bar">
-        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span class="on">Deployment</span>
-      </div>
-      <div class="project-block-visuals">
-        <img src="assets/img/paus_cad.png" alt="PAUS payload CAD assembly" />
-        <img src="assets/img/paus_partial_cad.png" alt="PAUS optical subsystem CAD" />
-        <img src="assets/img/paus_system.png" alt="Assembled PAUS system" />
-      </div>
-      <p class="project-block-summary">
-        Photoacoustic imaging works by firing a laser into tissue and listening to
-        the ultrasound it generates — which only produces an image if the laser
-        pulse and the ultrasound acquisition are synchronized to within
-        microseconds. GE HealthCare wanted this running on a commercial scanner
-        they already sell. I owned the mechanical payload that carries the optics,
-        and built the position-synchronized triggering that lets both modalities
-        run at once — which the platform had no mechanism for — from blank CAD
-        through a validated prototype.
-      </p>
-      <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Full mechanical design lifecycle plus the timing subsystem — SolidWorks parts under coupled optical, thermal, and mechanical constraints, GD&amp;T per ASME Y14.5, sub-mm tolerance stack-up, first-article inspection, and integration.</li>
-        <li><strong>The hard part:</strong> Firing the laser at known angular positions on a stage spinning at 17,400 deg/s — a capability the platform simply didn't have. I built it by triggering off the encoder (Aerotech position-synchronized output) rather than a clock, plus the 1000 Hz acquisition path in Python over UART.</li>
-        <li><strong>Outcome:</strong> Met clinical-grade image resolution targets without extending the timeline; co-authored publication at SPIE Photonics West 2025.</li>
-      </ul>
-      <div class="project-block-footer">
-        <span class="project-block-tags"><span>SolidWorks</span><span>GD&amp;T</span><span>Real-Time Sync</span><span>Python</span><span>V&amp;V</span></span>
-        <a href="projects/uwamit.html" class="project-block-link">Technical details →</a>
-      </div>
-    </article>
-
-    <!-- 4. Boeing ARC -->
-    <article class="project-block" id="boeing-arc">
-      <div class="project-block-header">
-        <div>
-          <h3>Redesigning a Robot End-Effector That Was Faking Its Own Defects</h3>
-          <p class="project-block-role">Boeing Advanced Research Center (BARC) · Mechanical Design Research Assistant · May 2023 – Jun 2024</p>
-        </div>
-      </div>
-      <div class="stack-bar">
-        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span>Deployment</span>
-      </div>
-      <div class="project-block-visuals img-2">
-        <img src="assets/img/curved_cad.png" alt="Two-curve probe end-effector CAD" />
-        <video src="assets/img/curved_probe.MOV" muted playsinline loop autoplay></video>
-      </div>
-      <p class="project-block-summary">
-        Boeing inspects composite parts by running an ultrasonic probe over them on
-        a robot arm. On curved parts, the scans kept showing defects that weren't
-        physically there — which is expensive, because you can't ship a part you
-        don't trust. I ran the signal analysis that showed the artifacts came from
-        the probe's own geometry and water coupling, not the part, then redesigned
-        the end-effector to remove the cause.
-      </p>
-      <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Diagnosis through delivered hardware — I found the root causes, designed the replacement probe, coordinated fabrication, inspected first articles, and validated it by scan testing.</li>
-        <li><strong>How it works:</strong> FFT analysis of the scan signal isolated two artifact sources; a novel two-curve probe geometry (SolidWorks, GD&amp;T, FEA, CNC-machinable) holds standoff across surfaces whose radius varies continuously; a redesigned fixture fixed the water-coupling one. I also implemented Boustrophedon cell decomposition for robot scan coverage.</li>
-        <li><strong>Outcome:</strong> Geometry-induced artifacts eliminated; 40% better water retention, improving defect-detection reliability and SNR.</li>
-      </ul>
-      <div class="project-block-footer">
-        <span class="project-block-tags"><span>End-Effector Design</span><span>FFT</span><span>Path Planning</span><span>SolidWorks</span><span>FEA</span></span>
-        <a href="projects/boeing-arc.html" class="project-block-link">Technical details →</a>
-      </div>
-    </article>
-
-    <!-- 5. Powerlight -->
+    <!-- 3. Powerlight -->
     <article class="project-block" id="powerlight">
       <div class="project-block-header">
         <div>
@@ -266,12 +203,12 @@
       </div>
     </article>
 
-    <!-- 6. Sun Lab / MARA -->
+    <!-- 4. Sun Lab / MARA -->
     <article class="project-block" id="sun-lab">
       <div class="project-block-header">
         <div>
           <h3>Closing the Loop on a Self-Driving Materials Lab</h3>
-          <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant · Sep 2024 – Apr 2025</p>
+          <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant · Amazon Robotics Research Fellow · Sep 2024 – Apr 2025</p>
         </div>
       </div>
       <div class="stack-bar">
@@ -300,41 +237,6 @@
       </div>
     </article>
 
-    <!-- 7. Washington Hyperloop -->
-    <article class="project-block" id="hyperloop">
-      <div class="project-block-header">
-        <div>
-          <h3>A Tunnel Boring Machine, 45 Engineers, and a Fixed Deadline</h3>
-          <p class="project-block-role">Washington Hyperloop · Executive Director &amp; Electromechanical Systems Engineer · Jan 2024 – Apr 2025</p>
-        </div>
-      </div>
-      <div class="stack-bar">
-        <span class="on">Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span>Learning</span><span class="on">Deployment</span>
-      </div>
-      <div class="project-block-visuals">
-        <img src="assets/img/final_tbm.png" alt="Completed tunnel boring machine" />
-        <img src="assets/img/tbm_site.png" alt="Competition tunneling site" />
-        <img src="assets/img/tbm_site2.png" alt="Tunneling site operations" />
-      </div>
-      <p class="project-block-summary">
-        A student team had to design and build a working tunnel boring machine from
-        nothing and run it at The Boring Company's national competition on a date
-        that would not move. I ran the organization and built its control system —
-        which meant I was both the person setting the ME/EE/firmware schedule and
-        the person up at night making the motors and pumps actually talk to the
-        server.
-      </p>
-      <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Executive Director over 5 subteams and 45+ engineers on a $20K budget, and hands-on owner of the electromechanical control system.</li>
-        <li><strong>How it works:</strong> ESP32 firmware (Embedded C) driving motor drivers and pump controllers over UART/I2C, reporting to a Python data server for live telemetry; emergency-stop and manual-start paths designed for low-latency, fail-safe response.</li>
-        <li><strong>Outcome:</strong> Zero control-system failures at competition, passed every mechanical, electrical, and software inspection, won the Cutterhead Mini-Competition, and came in under budget.</li>
-      </ul>
-      <div class="project-block-footer">
-        <span class="project-block-tags"><span>ESP32</span><span>Embedded C</span><span>Controls</span><span>Systems Integration</span><span>Leadership</span></span>
-        <a href="projects/washington-hyperloop.html" class="project-block-link">Technical details →</a>
-      </div>
-    </article>
-
     <!-- Publications -->
     <section class="minor-section" id="publications">
       <h2>Publications</h2>
@@ -353,8 +255,8 @@
 
     <!-- Graduate coursework projects -->
     <section class="minor-section" id="coursework">
-      <h2>Graduate coursework projects</h2>
-      <p>Course projects from my M.S. — smaller in scope than the work above.</p>
+      <h2>Coursework projects</h2>
+      <!-- <p>Course projects from my M.S. — smaller in scope than the work above.</p> -->
       <ul class="minor-list">
         <li>
           <strong>SHIELD — safe real-time robot controller.</strong>
@@ -369,30 +271,42 @@
           simulated trajectories; MAE of 0.0069 A validated against real battery data.
           <span class="meta">Mar – Jun 2025</span>
         </li>
-        <li>
+        <!-- <li>
           <strong>3–6 DoF robotic arm — CAD through motion planning.</strong>
           Designed the arm in SolidWorks, exported to URDF, implemented FK/IK and
           motion planning in ROS, and validated in MuJoCo.
           <span class="meta">Mar – Jun 2024</span>
-        </li>
+        </li> -->
       </ul>
     </section>
 
     <!-- Earlier work -->
     <section class="minor-section" id="earlier-work">
       <h2>Earlier work</h2>
-      <p>Undergraduate mechanical design and mechatronics projects, kept for reference.</p>
+      <p>Mechanical design, mechatronics, and systems engineering from before the robot-learning focus. Kept for reference; click through for the full write-ups.</p>
       <ul class="minor-list">
         <li>
-          <strong><a href="projects/design-build-fly.html">Design Build Fly — Landing Gear Lead.</a></strong>
-          Led landing gear design for the team's RC aircraft: concept trade study
-          against retracts and sliding pins, CAD and FEA, and fuselage/wing-spar
-          integration for a fully-removable one-piece gear.
+          <strong><a href="projects/uwamit.html">Photoacoustic-ultrasound imaging payload, with GE HealthCare.</a></strong>
+          Owned the mechanical design lifecycle of a custom PAUS payload in SolidWorks under coupled optical, thermal, and mechanical constraints (GD&amp;T per ASME Y14.5, sub-mm tolerance stack-up), and resolved a laser-fiber synchronization instability by redesigning the pulse-timing mechanism with embedded real-time control (Python, UART). Validated to clinical-grade targets; one co-authored publication.
+          <span class="meta">uWAMIT, UW Molecular Imaging &amp; Therapy · Jun 2024 – Mar 2025</span>
+        </li>
+        <li>
+          <strong><a href="projects/washington-hyperloop.html">Tunnel boring machine for national competition.</a></strong>
+          Built the electromechanical control system (ESP32, motor drivers, UART/I2C sensors, Python data server) and led 45+ engineers across 5 subteams as Executive Director; won the Cutterhead Mini-Competition with zero control-system failures.
+          <span class="meta">Washington Hyperloop · Jan 2024 – Apr 2025</span>
+        </li>
+        <li>
+          <strong><a href="projects/boeing-arc.html">Probe end-effector for composite ultrasonic inspection.</a></strong>
+          Traced phantom defects in curved-part scans to probe geometry and water coupling via FFT signal analysis, then designed and validated a replacement two-curve probe and test fixture in SolidWorks; coordinated fabrication, inspected first articles, and verified performance through scan testing.
+          <span class="meta">Boeing Advanced Research Center · May 2023 – Jun 2024</span>
+        </li>
+        <li>
+          <strong><a href="projects/design-build-fly.html">Landing gear lead, Design Build Fly.</a></strong>
+          Led landing gear design for the team's RC aircraft: concept trade study against retracts and sliding pins, CAD and FEA, and fuselage/wing-spar integration for a fully removable one-piece gear.
         </li>
         <li>
           <strong><a href="projects/anti-sway.html">Anti-sway control for a crane system.</a></strong>
-          Undergraduate mechatronics project: sensor/controller/actuator integration,
-          fabrication, and validation comparing tracking, idle, and anti-sway modes.
+          Undergraduate mechatronics project: sensor, controller, and actuator integration, fabrication, and validation comparing tracking, idle, and anti-sway modes.
         </li>
       </ul>
     </section>
