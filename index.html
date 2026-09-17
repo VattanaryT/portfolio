@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vattanary Tevy — Robotics &amp; Automation Engineer</title>
   <meta name="description" content="Robotics engineer developing fullstack robotics pipelines. Currently at UW's WEIRD Lab, automating carbon fiber layup with bimanual arms." />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=202609171253" />
 </head>
 <body>
   <header>
@@ -13,7 +13,7 @@
     <nav>
       <a href="#work">Work</a>
       <a href="#publications">Publications</a>
-      <a href="resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <a href="resume/Vattanary_Tevy_Resume.pdf?v=202609171253" target="_blank" rel="noopener">Resume</a>
     </nav>
   </header>
 
@@ -27,14 +27,11 @@
         <p class="positioning">
           <strong>I've enjoyed developing fullstack robotics pipelines.</strong>
         </p>
-        <p class="positioning">
-          My background is mechanical; I care about the layer most learning researchers never touch:
-          the electromechanical integration that determines whether a policy sees clean signals, feels the world accurately, and has any chance of generalizing beyond the training set.
-        </p>
         <p class="positioning" style="font-size: 0.95rem; color: var(--text-muted);">
-          Currently at UW's WEIRD Lab, supervised by PI Abhishek Gupta, I work on
-          automating carbon fiber layup using bimanual arms, building the end-to-end
-          system and developing the learning algorithms behind it.
+          Currently at UW's <strong>WEIRD Lab</strong>, supervised by PI
+          <strong>Abhishek Gupta</strong>, I work on automating carbon fiber layup
+          using bimanual arms, building the end-to-end system and developing the
+          learning algorithms behind it.
         </p>
 
         <p class="contact-inline">
@@ -114,25 +111,11 @@
         <video src="assets/img/geodude_gello_tool.mp4" muted playsinline loop autoplay></video>
       </div>
       <p class="project-block-summary">
-        Carbon fiber layup is still done by hand because success depends on
-        precise contact forces of a skilled technician. Changes in pressure could lead to 
-        distortion and wrinkles. My team is using a bimanual robot that learns the motion from human demonstrations:
-        the right arm performs the layup, and the left arm carries a
-        laser profilometer that scans the surface afterward and measures the surface quality. 
-        That measurement is both the grade for the policy and,
-        increasingly, the reward signal it trains against.
+        Carbon fiber layup automation with a dexterous bimanual robot.
       </p>
-      <ul class="project-block-bullets">
-        <li><strong>My role:</strong> I lead the system end to end, overseeing end-effector and tooling design for both arms, collecting the demonstrations on a GELLO-style teleoperation setup, writing the controller, training the policies, and evaluating them on the real hardware.</li>
-        <li><strong>The pipeline:</strong> A config-driven three-stage pipeline (rosbag &rarr; trajectory pkl &rarr; LeRobot dataset &rarr; training) with sharded conversion and checkpoint resume, so one command reproduces any dataset or training run. I own the pytest infrastructure for both stacks (37 modules, 165 tests) with hardware/CI markers, so control-law and kinematics logic is verified without a robot in the loop.</li>
-        <li><strong>How it works:</strong> A UR5e on a vertical rail (7 DoF) carries an end-effector modeled on the hand tool a technician actually uses. I collected 500+ GELLO teleoperated demonstrations across varied tools, strip sizes, and mold shapes, and train ACT and Diffusion Policy in PyTorch/CUDA, ablating 1D U-Net against transformer backbones across prediction and action horizons via Weights &amp; Biases sweeps.</li>
-        <li><strong>On hardware:</strong> Trained policies run closed-loop at 10 Hz under ROS2 Humble, with rollouts evaluated against a laser-profilometer scan of the workpiece captured by the second arm. I fused 6-DoF end-effector pose with wrist force/torque in the observation space and built an in-contact force loop on the real UR5e F/T over RTDE, plus DAgger-style human-in-the-loop intervention for targeted on-policy data collection against observed failure modes.</li>
-        <li><strong>What I found:</strong> Diffusion Policy clearly beats ACT here, because there is more than one valid way to lay a strip down.</li>
-        <li><strong>Current work:</strong> Rewriting the impedance controller to operate on the mold's curved surface rather than in world coordinates; separating tangential twist commands from normal-axis force, so the same policy transfers across mold geometries.</li>
-      </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>ACT</span><span>Diffusion Policy</span><span>Impedance Control</span><span>UR5e</span><span>ROS2</span></span>
-        <a href="projects/weird-lab.html" class="project-block-link">Technical details →</a>
+        <a href="projects/weird-lab.html" class="project-block-link">Details →</a>
       </div>
     </article>
 
@@ -140,31 +123,24 @@
     <article class="project-block" id="amazon-robotics">
       <div class="project-block-header">
         <div>
-          <h3>Debugging a Robotic Vision System in Production</h3>
+          <h3>Production Robotic Perception Failure Analysis</h3>
           <p class="project-block-role">Amazon Robotics · Robotics Data Scientist Intern · Sep – Dec 2025</p>
         </div>
       </div>
       <div class="stack-bar">
-        <span>Hardware</span><span class="on">Sensing</span><span>Control</span><span class="on">Learning</span><span class="on">Deployment</span>
+        <span>Hardware</span><span class="on">Sensing</span><span>Control</span><span>Learning</span><span class="on">Deployment</span>
       </div>
       <p class="project-block-summary">
-        A robotic vision system in production needs to be further optimized. There were some
-        parts that were failing intermittently, and had
-        been for about a month with no identified cause — too rare to reproduce on
-        demand, too frequent to ignore, and direct debugging had already stalled.
-        Rather than keep chasing individual traces, I treated the production logs
-        as a statistics problem: not "what went wrong here" but "which conditions
-        are the failures not independent of."
+        Explored perception inconsistency metrics to improve ML pipelines and the
+        overall robotic system.
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Owned the investigation, then contributed to the monitoring meant to catch the next one.</li>
-        <li><strong>How it works:</strong> Chi-square and independence tests across millions of production cycles, plus cross-model consistency metrics for the segmentation, depth, and dimension pipelines. Models observing the same scene are geometrically constrained, so their disagreement is a signal you get without labels.</li>
         <li><strong>Outcome:</strong> Root cause confirmed in under two weeks, unblocking the engineering fix; the scalable Python pipelines over AWS S3 and SQL stayed behind for production monitoring and alerting.</li>
-        <li><strong>Note:</strong> Confidential work — described at a deliberately high level.</li>
+        <li><strong>Note:</strong> Confidential work, described at a deliberately high level.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>Perception</span><span>Statistical Testing</span><span>Python</span><span>AWS S3</span><span>SQL</span></span>
-        <a href="projects/amazon-robotics.html" class="project-block-link">Technical details →</a>
+        <a href="projects/amazon-robotics.html" class="project-block-link">Details →</a>
       </div>
     </article>
 
@@ -172,12 +148,12 @@
     <article class="project-block" id="sun-lab">
       <div class="project-block-header">
         <div>
-          <h3>Closing the Loop on a Self-Driving Materials Lab</h3>
+          <h3>Self-Driving Materials Lab</h3>
           <p class="project-block-role">UW Sun Lab · Systems Engineering &amp; Machine Learning Research Assistant · Amazon Robotics Research Fellow · Sep 2024 – Apr 2025</p>
         </div>
       </div>
       <div class="stack-bar">
-        <span>Hardware</span><span class="on">Sensing</span><span class="on">Control</span><span class="on">Learning</span><span class="on">Deployment</span>
+        <span>Hardware</span><span class="on">Sensing</span><span>Control</span><span class="on">Learning</span><span class="on">Deployment</span>
       </div>
       <div class="project-block-visuals">
         <img src="assets/img/mara_architecture.png" alt="MARA system architecture" />
@@ -185,20 +161,14 @@
         <img src="assets/img/mara_workflow.jpg" alt="MARA experiment workflow" />
       </div>
       <p class="project-block-summary">
-        A self-driving lab is supposed to run experiments without a human: pick the
-        next formulation, mix it, deposit it, measure the result, repeat. This one
-        could do everything except the measuring — a person still had to eyeball
-        sample concentrations, which meant the "autonomous" loop stopped every
-        cycle and waited. I closed it with a camera.
+        Automated a self-driving lab environment for materials discovery.
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Built and deployed the perception half of the autonomy loop, and worked with the chemists to get it trusted enough to actually be used.</li>
-        <li><strong>How it works:</strong> Real-time computer vision extracting concentration from sample color, feeding the deposition controller directly; Latin Hypercube Sampling over a 96-sample Opentrons plate for experiment design; handling for cross-contamination, lighting noise, and stock depletion.</li>
         <li><strong>Outcome:</strong> Replaced manual spot-checks with continuous automated feedback and was adopted into active deposition workflows.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>Computer Vision</span><span>Closed-Loop Autonomy</span><span>Opentrons</span><span>Python</span></span>
-        <a href="projects/sun-lab.html" class="project-block-link">Technical details →</a>
+        <a href="projects/sun-lab.html" class="project-block-link">Details →</a>
       </div>
     </article>
 
@@ -206,7 +176,7 @@
     <article class="project-block" id="uwamit">
       <div class="project-block-header">
         <div>
-          <h3>A Clinical Imaging Payload Where Timing Is Measured in Microseconds</h3>
+          <h3>First Portable Photoacoustic Ultrasound (PAUS) Clinical Imaging System</h3>
           <p class="project-block-role">uWAMIT, UW Molecular Imaging &amp; Therapy Center, with GE HealthCare · Mechanical Design &amp; Mechatronics Researcher · Jun 2024 – Mar 2025</p>
         </div>
       </div>
@@ -219,20 +189,15 @@
         <img src="assets/img/paus_system.jpg" alt="Assembled PAUS system" />
       </div>
       <p class="project-block-summary">
-        Partnered with GE HealthCare to innovate on a VE95 clinical scanner,
-        adapting it for portable photoacoustic-ultrasound imaging to transform the
-        standard medical workflow. I owned the mechanical payload that carries the
-        optics and built the position-synchronized triggering that lets both
-        modalities run at once, from blank CAD through a validated prototype.
+        Adapted a GE HealthCare VE95 clinical scanner for portable
+        photoacoustic-ultrasound imaging.
       </p>
       <ul class="project-block-bullets">
-        <li><strong>My role:</strong> Full mechanical design lifecycle plus the timing subsystem: SolidWorks parts under coupled optical, thermal, and mechanical constraints, GD&amp;T, tolerance stack-up, first-article inspection, and integration.</li>
-        <li><strong>The hard part:</strong> Firing the laser at known angular positions on a stage spinning at 17,400 deg/s, a capability the platform simply did not have. I built it by triggering off the encoder (Aerotech position-synchronized output) rather than a clock, plus the 1000 Hz acquisition path in Python over UART.</li>
         <li><strong>Outcome:</strong> Met clinical-grade image resolution targets without extending the timeline; co-authored publication at SPIE Photonics West 2025.</li>
       </ul>
       <div class="project-block-footer">
         <span class="project-block-tags"><span>SolidWorks</span><span>GD&amp;T</span><span>Real-Time Sync</span><span>Python</span><span>V&amp;V</span></span>
-        <a href="projects/uwamit.html" class="project-block-link">Technical details &rarr;</a>
+        <a href="projects/uwamit.html" class="project-block-link">Details &rarr;</a>
       </div>
     </article>
 
@@ -319,7 +284,7 @@
       <a href="mailto:vtevy@uw.edu">vtevy@uw.edu</a>
       <a href="https://www.linkedin.com/in/vattanary-tevy" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/VattanaryT" target="_blank" rel="noopener">GitHub</a>
-      <a href="resume/Vattanary_Tevy_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      <a href="resume/Vattanary_Tevy_Resume.pdf?v=202609171253" target="_blank" rel="noopener">Resume (PDF)</a>
     </p>
     <p>Vattanary Tevy · Seattle, Washington</p>
   </footer>
