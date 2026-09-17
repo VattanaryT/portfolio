@@ -3,8 +3,11 @@
 
 /* =========  Global theme — minimalist, recruiter-friendly  ========= */
 :root {
-  --accent: #0d7377;
-  --accent-hover: #095456;
+  /* University of Washington palette */
+  --accent: #4b2e83;          /* Husky Purple */
+  --accent-hover: #3a2266;
+  --accent-gold: #b7a57a;     /* Husky Gold */
+  --accent-gold-deep: #85754d;
   --text: #1a1a1a;
   --text-muted: #5c5c5c;
   --bg: #fafafa;
@@ -880,7 +883,7 @@ main {
 .callout {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--accent-gold);
   border-radius: 4px;
   padding: 0.9rem 1.1rem;
   font-size: 0.9rem;
