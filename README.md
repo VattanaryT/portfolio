@@ -13,8 +13,8 @@ Contact: [vtevy@uw.edu](mailto:vtevy@uw.edu) ·
 ## Selected work
 
 Each project has a longer write-up covering the hardware, the sensing, the control,
-and the learning, depending on what it touched. Those pages are being revised and
-are not linked from the site yet.
+and the learning, depending on what it touched. Those pages are still being revised
+and live on the `dev` branch rather than the published site.
 
 | Project | What it is |
 | --- | --- |
