@@ -12,15 +12,16 @@ Contact: [vtevy@uw.edu](mailto:vtevy@uw.edu) ·
 
 ## Selected work
 
-Each project has a write-up covering the hardware, the sensing, the control, and
-the learning, depending on what it touched.
+Each project has a longer write-up covering the hardware, the sensing, the control,
+and the learning, depending on what it touched. Those pages are being revised and
+are not linked from the site yet.
 
-| Project | What it is | Write-up |
-| --- | --- | --- |
-| **Robot Learning with Bimanual Arms for Carbon Fiber Layup Automation**<br><sub>WEIRD Lab, UW · 2026 – present</sub> | Carbon fiber layup automation with a dexterous bimanual robot. | [Details](https://vattanaryt.github.io/portfolio/projects/weird-lab.html) |
-| **Production Robotic Perception Failure Analysis**<br><sub>Amazon Robotics · 2025</sub> | Perception inconsistency metrics to improve ML pipelines and the overall robotic system. | [Details](https://vattanaryt.github.io/portfolio/projects/amazon-robotics.html) |
-| **Self-Driving Materials Lab**<br><sub>UW Sun Lab · 2024 – 2025</sub> | Automated a self-driving lab environment for materials discovery. | [Details](https://vattanaryt.github.io/portfolio/projects/sun-lab.html) |
-| **First Portable Photoacoustic Ultrasound (PAUS) Clinical Imaging System**<br><sub>uWAMIT with GE HealthCare · 2024 – 2025</sub> | Adapted a GE HealthCare VE95 clinical scanner for portable photoacoustic-ultrasound imaging. | [Details](https://vattanaryt.github.io/portfolio/projects/uwamit.html) |
+| Project | What it is |
+| --- | --- |
+| **Robot Learning with Bimanual Arms for Carbon Fiber Layup Automation**<br><sub>WEIRD Lab, UW · 2026 – present</sub> | Carbon fiber layup automation with a dexterous bimanual robot. |
+| **Production Robotic Perception Failure Analysis**<br><sub>Amazon Robotics · 2025</sub> | Perception inconsistency metrics to improve ML pipelines and the overall robotic system. |
+| **Self-Driving Materials Lab**<br><sub>UW Sun Lab · 2024 – 2025</sub> | Automated a self-driving lab environment for materials discovery. |
+| **First Portable Photoacoustic Ultrasound (PAUS) Clinical Imaging System**<br><sub>uWAMIT with GE HealthCare · 2024 – 2025</sub> | Adapted a GE HealthCare VE95 clinical scanner for portable photoacoustic-ultrasound imaging. |
 
 Earlier mechanical design, mechatronics, and systems engineering work is documented
 in [`projects/`](projects/): an automated PV cell test machine (Powerlight), a tunnel
